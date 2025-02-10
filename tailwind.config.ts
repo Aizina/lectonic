@@ -15,11 +15,17 @@ export default {
 			colors: {
 				primary: {
 					DEFAULT: '#4860EF',
-					hover: '#798CFC',
+					hover: '#2D43C5',
 				},
 				secondary: {
 					DEFAULT: '#B2D6FF',
 					hover: '#97BFEE',
+				},
+				primaryText: {
+					DEFAULT: '#1F1F20',
+				},
+				secondaryText: {
+					DEFAULT: '#565656',
 				},
 			},
 		},

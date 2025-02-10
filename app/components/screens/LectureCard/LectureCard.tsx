@@ -1,7 +1,14 @@
 import { FC } from 'react'
+import LectureHeader from './LectureHeader/LectureHeader'
+import LectureInfo from './LectureInfo/LectureInfo'
 
 const LectureCard: FC = () => {
-  return <div>LectureCard</div>
+	return (
+		<>
+			<LectureHeader />
+			<LectureInfo />
+		</>
+	)
 }
 
 export default LectureCard

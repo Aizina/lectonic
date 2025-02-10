@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { FC } from 'react'
 
 const links = [
@@ -26,7 +25,6 @@ const links = [
 ]
 
 const Nav: FC = () => {
-	const pathname = usePathname()
 	return (
 		<nav className='flex gap-2 [@media(max-width:1520px)]:gap-8 xl:gap-16 font-gotham'>
 			{links.map((link, index) => {
@@ -34,9 +32,9 @@ const Nav: FC = () => {
 					<Link
 						href={link.path}
 						key={index}
-						className={`${
-							link.path === pathname && 'text-primary'
-						} capitalize font-medium hover:text-accent transition-all`}
+						className={
+							'capitalize font-medium text-primaryText hover:text-primary'
+						}
 					>
 						{link.name}
 					</Link>

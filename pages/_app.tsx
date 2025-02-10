@@ -6,7 +6,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<Layout>
 			<Head>
-				<title>Qw3ko | Frontend Developer</title>
+				<title>Лектоник | Карточка лекции</title>
 			</Head>
 			<Component {...pageProps} />
 		</Layout>
