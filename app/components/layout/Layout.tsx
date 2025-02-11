@@ -1,4 +1,5 @@
 import '../../assets/globals.css'
+import Footer from '../ui/footer/Footer'
 import Header from '../ui/header/Header'
 
 export default function Layout({
@@ -10,6 +11,7 @@ export default function Layout({
 		<div>
 			<Header />
 			{children}
+			<Footer />
 		</div>
 	)
 }
