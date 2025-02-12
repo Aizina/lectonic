@@ -21,10 +21,10 @@ const themes = [
 
 const LectureInfo: FC = () => {
 	return (
-		<div className='px-44 py-12 flex justify-between'>
+		<div className='container mx-auto my-12 flex justify-between gap-40'>
 			<div className='flex flex-col justify-between max-w-[50%]'>
 				<div className='flex flex-col'>
-					<div className='pb-9 font-azoft text-[48px] text-primaryText leading-[64px] uppercase'>
+					<div className='pb-9 font-azoft sm:text-[48px] xl:text-[48px] text-primaryText leading-[64px] uppercase'>
 						Цифровая трансформация: Реальные кейсы
 					</div>
 					<div className='flex justify-between items-center w-[440px] py-3 px-8 rounded-[52px] bg-primary hover:bg-primary-hover hover:cursor-pointer'>
@@ -40,7 +40,7 @@ const LectureInfo: FC = () => {
 					</span>
 				</div>
 				<div className='flex'>
-					<div>
+					<div className='flex items-center'>
 						<Image src={lector} alt='Лектор' />
 					</div>
 					<div className='p-5 flex flex-col'>
@@ -54,10 +54,11 @@ const LectureInfo: FC = () => {
 				</div>
 			</div>
 			<div className='max-w-[656px]'>
-				<div>
-					<Image src={themeBg} alt='Картинка темы' />
-				</div>
-				<div className='pt-12 flex gap-5 font-gotham font-medium text-[16px] leading-[28px] items-center'>
+				<Image
+					src={themeBg}
+					alt='Картинка темы'
+				/>
+				<div className='pt-12 flex flex-wrap gap-5 font-gotham font-medium text-[16px] leading-[28px] items-center'>
 					{themes.map(theme => (
 						<div
 							key={theme.title}
