@@ -2,7 +2,8 @@ import lector from '@/assets/img/lector_avatar_example.png'
 import themeBg from '@/assets/img/theme_bg.png'
 import arrowRight from '@/assets/svg/arrow-right.svg'
 import Image from 'next/image'
-import { FC } from 'react'
+import { FC, useState } from 'react'
+import LectureOrder from '../LectureOrder/LectureOrder'
 
 const themes = [
 	{
@@ -20,14 +21,18 @@ const themes = [
 ]
 
 const LectureInfo: FC = () => {
+	const [isModalOpen, setIsModalOpen] = useState(false)
 	return (
-		<div className='container mx-auto my-12 flex justify-between gap-40'>
+		<div className='container mx-auto my-12 flex justify-between'>
 			<div className='flex flex-col justify-between max-w-[50%]'>
 				<div className='flex flex-col'>
 					<div className='pb-9 font-azoft sm:text-[48px] xl:text-[48px] text-primaryText leading-[64px] uppercase'>
 						Цифровая трансформация: Реальные кейсы
 					</div>
-					<div className='flex justify-between items-center w-[440px] py-3 px-8 rounded-[52px] bg-primary hover:bg-primary-hover hover:cursor-pointer'>
+					<div
+						onClick={() => setIsModalOpen(true)}
+						className='flex justify-between items-center w-[440px] py-3 px-8 rounded-[52px] bg-primary hover:bg-primary-hover hover:cursor-pointer'
+					>
 						<span className='font-gotham text-white text-[24px]'>
 							Заказать лекцию
 						</span>
@@ -35,6 +40,10 @@ const LectureInfo: FC = () => {
 							<Image src={arrowRight} alt='Arrow right' />
 						</span>
 					</div>
+					<LectureOrder
+						isOpen={isModalOpen}
+						onClose={() => setIsModalOpen(false)}
+					/>
 					<span className='px-8 py-3 text-secondaryText text-[14px] leading-[20px]'>
 						Стоимость лекции по запросу*
 					</span>

@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@theme {
-	--breakpoint-lg: 1410px;
-}
-
 @font-face {
 	font-family: 'Azoft Sans';
 	src: url('../assets/fonts/azoft-sans-bold.ttf') format('truetype');

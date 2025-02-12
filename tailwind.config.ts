@@ -10,6 +10,8 @@ export default {
 		fontFamily: {
 			azoft: ['Azoft Sans', 'sans-serif'],
 			gotham: ['Gotham', 'sans-serif'],
+			lato: ['Lato', 'sans-serif'],
+			roboto: ['Roboto', 'sans-serif'],
 		},
 		extend: {
 			colors: {
