@@ -1,4 +1,5 @@
 import '../../assets/globals.css'
+import Footer from '../ui/footer/Footer'
 import Header from '../ui/header/Header'
 
 export default function Layout({
@@ -8,8 +9,9 @@ export default function Layout({
 }>) {
 	return (
 		<div>
-			<Header />
+			{/* <Header /> */}
 			{children}
+			<Footer />
 		</div>
 	)
 }
