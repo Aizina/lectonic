@@ -37,23 +37,28 @@ const details = [
 
 const LectureDetails: FC = () => {
   return (
-    <div className="w-[94vw] bg-[#4860EF] py-16 px-6 text-white rounded-[32px] m-auto">
+    <div className="w-[94vw] py-16 px-6 text-white m-auto font-gotham">
       <div className="p-[40px] mx-auto">
-        <div className="flex flex-col items-left justify-left md:flex-row md:justify-between md:items-center pb-10 text-left border-b border-white">
-          <span className="text-base font-normal">Что вас ждёт?</span>
-          <span className="text-[32px] font-bold">Основные детали лекции</span>
+        <div className="flex flex-col items-left justify-left md:flex-row md:justify-between md:items-center 
+        pb-8 text-left border-b border-[#1F1F20]">
+          <span className="text-xs lg:text-base font-normal text-[#565656]">Что вас ждёт?</span>
+          <span className="text-lg lg:text-[32px] font-bold text-[#1F1F20] font-azoft">Основные детали лекции</span>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 2xl:gap-[2vw] pt-10">
-          {details.map((detail, index) => (
-            <div
-              key={index}
-              className={`p-6 rounded-[32px] ${detail.bgColor} flex flex-col items-start h-full text-left`}
-            >
-              <span className={`text-md 2xl:text-2xl font-bold mb-24 ${detail.textColor}`}>{detail.title}</span>
-              <span className={`text-lg 2xl:text-4xl font-bold ${detail.textColor} pt-2`}>{detail.value}</span>
-              <span className={`text-sm 2xl:text-base font-normal ${detail.textColor} pt-4`}>{detail.description}</span>
-            </div>
-          ))}
+        <div className="flex flex-col gap-6 2xl:gap-[2vw] p-12 my-8 mx-auto bg-[#4860EF] rounded-[32px] max-w-[820px]">
+          <h3 className="font-bold text-2xl text-[#FCFCFC]">01. Целевая аудитория</h3>
+          <p className="font-normal text-base text-[#CBD3FF]">Лекция подходит для предпринимателей и специалистов, которые хотят внедрять инновации, улучшать бизнес-процессы и повышать эффективность работы.</p>
+          <h3 className="font-bold text-2xl text-[#FCFCFC]">02. Результат</h3>
+          <p className="font-normal text-base text-[#CBD3FF]">Вы получите практические навыки и рекомендации, которые помогут внедрять современные инструменты и сразу применять знания в работе.</p>
+        </div>
+        <div className="flex flex-col items-left justify-left text-[#1F1F20]">
+          <div className='border-b border-[#1F1F20] flex flex-row justify-between items-center p-8'>
+            <span className='text-md lg:text-2xl font-medium'>Длительность</span>
+            <span className='text-3xl lg:text-[42px] font-bold'>2 часа</span>
+          </div>
+          <div className='border-b border-[#1F1F20] flex flex-row justify-between items-center p-8'>
+            <span className='text-md lg:text-2xl font-medium'>Формат</span>
+            <span className='text-3xl lg:text-[42px] font-bold'>Офлайн</span>            
+          </div>
         </div>
       </div>
     </div>

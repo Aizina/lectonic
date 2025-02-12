@@ -7,8 +7,8 @@ import ReviewsCarousel from './Reviews/ReviewsCarousel'
 const LectureCard: FC = () => {
 	return (
 		<>
-			<LectureHeader />
-			<LectureInfo />
+			{/* <LectureHeader />
+			<LectureInfo /> */}
 			<LectureDetails />
 			<ReviewsCarousel />
 		</>
