@@ -1,4 +1,4 @@
-import Layout from '@/app/components/layout/Layout'
+import Layout from '@/components/layout/Layout'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 

@@ -1,8 +1,8 @@
+import lector from '@/assets/img/lector_avatar_example.png'
+import themeBg from '@/assets/img/theme_bg.png'
+import arrowRight from '@/assets/svg/arrow-right.svg'
 import Image from 'next/image'
 import { FC } from 'react'
-import lector from '../../../../assets/img/lector_avatar_example.png'
-import themeBg from '../../../../assets/img/theme_bg.png'
-import arrowRight from '../../../../assets/svg/arrow-right.svg'
 
 const themes = [
 	{
@@ -54,10 +54,7 @@ const LectureInfo: FC = () => {
 				</div>
 			</div>
 			<div className='max-w-[656px]'>
-				<Image
-					src={themeBg}
-					alt='Картинка темы'
-				/>
+				<Image src={themeBg} alt='Картинка темы' />
 				<div className='pt-12 flex flex-wrap gap-5 font-gotham font-medium text-[16px] leading-[28px] items-center'>
 					{themes.map(theme => (
 						<div
