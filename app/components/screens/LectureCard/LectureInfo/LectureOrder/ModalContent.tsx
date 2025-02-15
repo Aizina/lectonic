@@ -18,7 +18,7 @@ const ModalContent: FC<ModalContentProps> = ({ isOpen, onClose }) => (
 	>
 		<button
 			onClick={onClose}
-			className='absolute top-4 right-6 text-black text-[15px] font-bold hover:text-gray-800 transition-colors'
+			className='absolute top-4 right-7 text-black text-[17px] font-bold hover:text-gray-800 transition-colors'
 		>
 			✕
 		</button>

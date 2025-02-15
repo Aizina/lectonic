@@ -3,7 +3,7 @@ import themeBg from '@/assets/img/theme_bg.png'
 import arrowRight from '@/assets/svg/arrow-right.svg'
 import Image from 'next/image'
 import { FC, useState } from 'react'
-import LectureOrder from '../LectureOrder/LectureOrder'
+import LectureOrder from './LectureOrder/LectureOrder'
 
 const themes = [
 	{

@@ -121,7 +121,7 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 				maxLength={250}
 				className='bg-gray-100 rounded-[26px] outline-none p-4 mb-8 h-40 max-h-[160px] resize-none'
 			/>
-			<label className='text-sm flex items-center space-x-2 font-roboto font-light mb-8'>
+			<label className='text-sm flex items-center space-x-2 font-roboto font-light mb-16'>
 				<div className='relative'>
 					<input
 						type='checkbox'
@@ -144,7 +144,7 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 						/>
 					</svg>
 				</div>
-				<span>
+				<span className='pl-2'>
 					Согласен(на) с{' '}
 					<a href='#' className='text-black font-bold underline'>
 						пользовательским соглашением
