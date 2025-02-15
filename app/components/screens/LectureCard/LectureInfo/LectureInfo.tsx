@@ -63,7 +63,7 @@ const LectureInfo: FC = () => {
 				</div>
 			</div>
 			<div className='max-w-[656px]'>
-				<Image src={themeBg} alt='Картинка темы' />
+				<Image src={themeBg} alt='Картинка темы' priority />
 				<div className='pt-12 flex flex-wrap gap-5 font-gotham font-medium text-[16px] leading-[28px] items-center'>
 					{themes.map(theme => (
 						<div
