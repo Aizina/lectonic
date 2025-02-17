@@ -17,19 +17,48 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 	const [nameError, setNameError] = useState('')
 	const [phoneError, setPhoneError] = useState('')
 
-	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const rawValue = e.target.value
-		const cleanedValue = rawValue.replace(/[^А-Яа-яЁё \-]/g, '')
-		setNameError(
-			cleanedValue.length < rawValue.length
-				? 'Только кириллица, пробел и дефис!'
-				: ''
-		)
-		setName(cleanedValue)
+	const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === ' ') {
+			const input = e.target as HTMLInputElement
+			if (
+				input.selectionStart === 0 ||
+				(input.selectionStart && input.value[input.selectionStart - 1] === ' ')
+			) {
+				e.preventDefault()
+			}
+		}
 	}
 
-	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+	const handleNameBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+		setName(e.target.value.trim())
+	}
+
+	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const rawValue = e.target.value
+		const allowed = rawValue.replace(/[^А-Яа-яЁё \-]/g, '')
+		const collapsed = allowed.replace(/\s{2,}/g, ' ')
+		setNameError(
+			collapsed.length < rawValue.length
+				? 'Только кириллица, пробел и дефис, без лишних пробелов!'
+				: ''
+		)
+		setName(collapsed)
+	}
+
+	const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === ' ') {
+			e.preventDefault()
+		}
+	}
+
+	const handleEmailBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+		setEmail(e.target.value.trim())
+	}
+
+	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value)
+	}
+
 	const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const rawValue = e.target.value
 		const cleanedValue = rawValue.replace(/[^\d+]/g, '')
@@ -38,12 +67,23 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 		)
 		setPhone(cleanedValue)
 	}
-	const handleOrgChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-		setOrg(e.target.value)
-	const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-		setMessage(e.target.value)
-	const handleAgreeChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+
+	const forbiddenRegex = /[#$&\${}\[\]<>\/\\;%=']/g
+	const handleOrgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const raw = e.target.value
+		const cleaned = raw.replace(forbiddenRegex, '')
+		setOrg(cleaned)
+	}
+
+	const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const raw = e.target.value
+		const cleaned = raw.replace(forbiddenRegex, '')
+		setMessage(cleaned)
+	}
+
+	const handleAgreeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setAgree(e.target.checked)
+	}
 
 	const handleFormSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -73,6 +113,8 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 					title='Разрешены только буквы русского алфавита, пробелы и дефис'
 					value={name}
 					onChange={handleNameChange}
+					onKeyDown={handleNameKeyDown}
+					onBlur={handleNameBlur}
 					className={`bg-gray-100 rounded-[40px] outline-none p-4 w-full ${
 						!nameError ? 'mb-8' : ''
 					}`}
@@ -84,10 +126,14 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 			<input
 				type='email'
 				placeholder='Почта*'
+				required
+				maxLength={50}
+				pattern='^(?!\s)(?!.*\s$)(?=[^@]+@[^@]+\.[^@]+).+$'
+				title="Email must contain '@' and a dot after '@', with no leading or trailing spaces"
 				value={email}
 				onChange={handleEmailChange}
-				maxLength={50}
-				required
+				onKeyDown={handleEmailKeyDown}
+				onBlur={handleEmailBlur}
 				className='bg-gray-100 rounded-[40px] outline-none p-4 mb-8'
 			/>
 			<div>
@@ -95,9 +141,9 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 					type='tel'
 					placeholder='Номер телефона*'
 					required
+					maxLength={17}
 					value={phone}
 					onChange={handlePhoneChange}
-					maxLength={17}
 					className={`bg-gray-100 rounded-[40px] outline-none p-4 w-full ${
 						!phoneError ? 'mb-8' : ''
 					}`}
@@ -109,19 +155,19 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 			<input
 				type='text'
 				placeholder='Название организации'
+				maxLength={50}
 				value={org}
 				onChange={handleOrgChange}
-				maxLength={50}
 				className='bg-gray-100 rounded-[40px] outline-none p-4 mb-8'
 			/>
 			<textarea
 				placeholder='Введите ваше сообщение и укажите, где с вами можно связаться (например, Telegram @username).'
+				maxLength={250}
 				value={message}
 				onChange={handleMessageChange}
-				maxLength={250}
 				className='bg-gray-100 rounded-[26px] outline-none p-4 mb-8 h-40 max-h-[160px] resize-none'
 			/>
-			<label className='text-sm flex items-center space-x-2 font-roboto font-light mb-16'>
+			<label className='text-sm flex items-center space-x-2 font-roboto font-light mb-8'>
 				<div className='relative'>
 					<input
 						type='checkbox'
@@ -144,7 +190,7 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 						/>
 					</svg>
 				</div>
-				<span className='pl-2'>
+				<span>
 					Согласен(на) с{' '}
 					<a href='#' className='text-black font-bold underline'>
 						пользовательским соглашением
