@@ -91,7 +91,7 @@ const ReviewsCarousel: FC = () => {
               className={`p-6 rounded-[26px] shadow-lg bg-white w-[450px] flex-shrink-0 transition-transform duration-300 ${
                 i === index ? 'opacity-50' : 'opacity-100 scale-95'
               }`}
-              style={{ transform: `translateX(-${index * 20}%)` }}
+              style={{ transform: `translateX(-${index * 100}%)` }}
             >
               <span className="text-[25px] font-medium text-[#252525]">{review.name}</span>
               <div className="flex justify-between items-center gap-8 mt-2 border-b border-[#3F3F3F2B] pb-4">
