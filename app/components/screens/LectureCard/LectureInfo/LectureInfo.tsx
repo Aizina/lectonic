@@ -1,33 +1,26 @@
 import lector from '@/assets/img/lector_avatar_example.png'
 import themeBg from '@/assets/img/theme_bg.png'
 import arrowRight from '@/assets/svg/arrow-right.svg'
+import { LectureData } from '@/shared/types/lecture.types'
 import Image from 'next/image'
 import { FC, useState } from 'react'
 import LectureOrder from './LectureOrder/LectureOrder'
 
-const themes = [
-	{
-		title: 'ЦифроваяТрансформация',
-		active: true,
-	},
-	{
-		title: 'БизнесТехнологии',
-		active: false,
-	},
-	{
-		title: 'DigitalЛекция',
-		active: false,
-	},
-]
+interface LectureInfoProps {
+	lectureData: LectureData
+}
 
-const LectureInfo: FC = () => {
+const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false)
+
+	const { lecture, themes } = lectureData
+
 	return (
 		<div className='container mx-auto my-12 flex justify-between'>
 			<div className='flex flex-col justify-between max-w-[50%]'>
 				<div className='flex flex-col'>
 					<div className='pb-9 font-azoft sm:text-[48px] xl:text-[48px] text-primaryText leading-[64px] uppercase'>
-						Цифровая трансформация: Реальные кейсы
+						{lecture.title}
 					</div>
 					<div
 						onClick={() => setIsModalOpen(true)}
@@ -64,31 +57,35 @@ const LectureInfo: FC = () => {
 			</div>
 			<div className='max-w-[656px]'>
 				<Image src={themeBg} alt='Картинка темы' priority />
-				<div className='pt-12 flex flex-wrap gap-5 font-gotham font-medium text-[16px] leading-[28px] items-center'>
-					{themes.map(theme => (
-						<div
-							key={theme.title}
-							className={
-								theme.active
-									? 'py-3 px-5 bg-primary text-white rounded-[50px]'
-									: 'py-3 px-5 border border-primary text-primaryText rounded-[50px]'
-							}
-						>
-							{theme.title}
-						</div>
-					))}
+				<div className='flex flex-wrap gap-4'>
+					<div className='pt-12 gap-5 font-gotham font-medium text-[16px] leading-[28px] items-center'>
+						{themes.main_themes.map((theme, index) => (
+							<div
+								key={index}
+								className='py-3 px-5 bg-primary text-white rounded-[50px]'
+							>
+								{theme}
+							</div>
+						))}
+					</div>
+
+					<div className='pt-12 gap-5 font-gotham font-medium text-[16px] leading-[28px] items-center'>
+						{themes.subtheme_list.map((subtheme, idx) => (
+							<div
+								key={idx}
+								className='py-3 px-5 border border-primary text-primaryText rounded-[50px]'
+							>
+								{subtheme}
+							</div>
+						))}
+					</div>
 				</div>
 				<div className='pt-10 flex flex-col'>
 					<span className='font-gotham text-[24px] leading-[28px] font-medium text-primaryText'>
 						Описание:
 					</span>
 					<span className='pt-5 w-full font-gotham font-normal text-[20px] leading-[28px] text-secondaryText break-words'>
-						В лекции «Цифровая трансформация: Реальные кейсы» Иван Иванович
-						Петров делится своим опытом внедрения цифровых технологий в крупных
-						компаниях. Он расскажет о том, как традиционные бизнес-процессы
-						трансформируются под влиянием современных IT-решений, поделится
-						историями успеха и практическими рекомендациями для компаний,
-						стремящихся к инновациям.
+						{lecture.description}
 					</span>
 				</div>
 			</div>

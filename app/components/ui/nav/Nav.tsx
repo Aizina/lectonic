@@ -33,7 +33,7 @@ const Nav: FC = () => {
 						href={link.path}
 						key={index}
 						className={
-							'capitalize font-medium text-primaryText hover:text-primary'
+							'font-medium text-[17px] leading-[19.2px] text-primaryText hover:text-primary'
 						}
 					>
 						{link.name}
