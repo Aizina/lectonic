@@ -5,8 +5,12 @@ import LectureHeader from './LectureHeader/LectureHeader'
 import LectureInfo from './LectureInfo/LectureInfo'
 import ReviewsCarousel from './Reviews/ReviewsCarousel'
 
-const LectureCard: FC = () => {
-	const { lectureData, loading, error } = useLectureData()
+interface LectureCardProps {
+	id?: string
+}
+
+const LectureCard: FC<LectureCardProps> = ({ id }) => {
+	const { lectureData, loading, error } = useLectureData(id)
 
 	if (loading) {
 		return (

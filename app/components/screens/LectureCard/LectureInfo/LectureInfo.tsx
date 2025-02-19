@@ -57,28 +57,24 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 			</div>
 			<div className='max-w-[656px]'>
 				<Image src={themeBg} alt='Картинка темы' priority />
-				<div className='flex flex-wrap gap-4'>
-					<div className='pt-12 gap-5 font-gotham font-medium text-[16px] leading-[28px] items-center'>
-						{themes.main_themes.map((theme, index) => (
-							<div
-								key={index}
-								className='py-3 px-5 bg-primary text-white rounded-[50px]'
-							>
-								{theme}
-							</div>
-						))}
-					</div>
+				<div className='flex flex-wrap gap-4 pt-12 font-gotham font-medium text-[16px] leading-[28px] items-center'>
+					{themes.main_themes.map((theme, index) => (
+						<div
+							key={`main-${index}`}
+							className='py-3 px-5 bg-primary text-white rounded-[50px]'
+						>
+							{theme}
+						</div>
+					))}
 
-					<div className='pt-12 gap-5 font-gotham font-medium text-[16px] leading-[28px] items-center'>
-						{themes.subtheme_list.map((subtheme, idx) => (
-							<div
-								key={idx}
-								className='py-3 px-5 border border-primary text-primaryText rounded-[50px]'
-							>
-								{subtheme}
-							</div>
-						))}
-					</div>
+					{themes.subtheme_list.map((subtheme, idx) => (
+						<div
+							key={`sub-${idx}`}
+							className='py-3 px-5 border border-primary text-primaryText rounded-[50px]'
+						>
+							{subtheme}
+						</div>
+					))}
 				</div>
 				<div className='pt-10 flex flex-col'>
 					<span className='font-gotham text-[24px] leading-[28px] font-medium text-primaryText'>

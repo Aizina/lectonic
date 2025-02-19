@@ -2,29 +2,30 @@ import { LectureData, LectureResponse } from '@/shared/types/lecture.types'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-export function useLectureData() {
+export function useLectureData(lectureId?: string) {
 	const [lectureData, setLectureData] = useState<LectureData | null>(null)
-	const [loading, setLoading] = useState<boolean>(true)
+	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState<string | null>(null)
 
 	useEffect(() => {
+		if (!lectureId) {
+			setLoading(false)
+			return
+		}
+
+		setLoading(true)
 		axios
 			.get<LectureResponse>(
-				'https://api.lectonic.skroy.ru/lecture/4c156f55-750a-4246-adb4-939f40d7dd2c'
+				`https://api.lectonic.skroy.ru/lecture/${lectureId}`
 			)
-			.then(response => {
-				const data = response.data
-				if (data.detail.code === 'OK' && data.data.length > 0) {
-					setLectureData(data.data[0])
-				} else {
-					setError('Не удалось получить данные о лекции')
-				}
+			.then(res => {
+				setLectureData(res.data.data[0])
 			})
 			.catch(err => {
-				setError(err.message || 'Ошибка при получении данных о лекции')
+				setError(err.message || 'Произошла ошибка при загрузке данных о лекции')
 			})
 			.finally(() => setLoading(false))
-	}, [])
+	}, [lectureId])
 
 	return { lectureData, loading, error }
 }

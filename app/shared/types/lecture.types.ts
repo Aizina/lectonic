@@ -25,12 +25,16 @@ export interface LectureData {
 }
 
 export interface LectureResponse {
-	detail: {
-		code: string
-		message: string
-	}
+	detail: Detail
 	data: LectureData[]
-	info: {
-		api_version: string
-	}
+	info: Info
+}
+
+export interface Info {
+	api_version: string
+}
+
+export interface Detail {
+	code: string
+	message: string
 }
