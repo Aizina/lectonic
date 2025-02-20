@@ -6,12 +6,13 @@ const Header: FC = () => {
 	return (
 		<header className='py-8 xl:py-8 text-black text-accent border-b border-gray-400'>
 			<div className='flex mx-20 justify-between items-center'>
-				<Link href='/'>
-					<h1 className='text-4xl text-primary font-semibold'>Лектоник</h1>
+				<Link
+					href='/'
+					className='text-[32px] leading-[38.4px] text-primary font-bold'
+				>
+					Лектоник
 				</Link>
-				<div className='flex items-center gap-8'>
-					<Nav />
-				</div>
+				<Nav />
 				<div className='flex items-center gap-12'>
 					<Link href='/auth'>
 						<button className='font-gotham font-bold text-primary text-[24px]'>

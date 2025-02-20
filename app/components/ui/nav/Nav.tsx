@@ -26,7 +26,7 @@ const links = [
 
 const Nav: FC = () => {
 	return (
-		<nav className='flex gap-2 [@media(max-width:1520px)]:gap-8 xl:gap-16 font-gotham'>
+		<nav className='flex gap-16 max-xl:gap-4 max-2xl:gap-8 font-gotham'>
 			{links.map((link, index) => {
 				return (
 					<Link
