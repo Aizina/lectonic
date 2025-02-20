@@ -55,8 +55,8 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 					</div>
 				</div>
 			</div>
-			<div className='sm:max-w-[470px] xl:max-w-[656px]'>
-				<div className='relative sm:w-[470px] sm:h-[285px] xl:w-[625px] xl:h-[285px] rounded-[26px] overflow-hidden'>
+			<div className='max-w-[656px] max-xl:max-w-[450px]'>
+				<div className='relative w-[656px] h-[285px] max-xl:w-[450px] rounded-[26px] overflow-hidden'>
 					<Image
 						src={lecture.image.long ? lecture.image.long : defaultLectureImage}
 						alt='Картинка темы'
