@@ -6,17 +6,18 @@ export interface Lecture {
 	price: string[]
 	result: string
 	format: string
-	image: string | null
+	image: Image
 	target_audience: string
+}
+
+export interface Image {
+	long: string
+	short: string
 }
 
 export interface Themes {
 	subtheme_list: string[]
 	main_themes: string[]
-	image: {
-		long: string
-		short: string
-	}
 }
 
 export interface LectureData {

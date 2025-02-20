@@ -1,5 +1,5 @@
 import lector from '@/assets/img/lector_avatar_example.png'
-import themeBg from '@/assets/img/theme_bg.png'
+import defaultLectureImage from '@/assets/img/theme_bg.png'
 import arrowRight from '@/assets/svg/arrow-right.svg'
 import { LectureData } from '@/shared/types/lecture.types'
 import Image from 'next/image'
@@ -16,7 +16,7 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 	const { lecture, themes } = lectureData
 
 	return (
-		<div className='container mx-auto my-12 flex justify-between'>
+		<div className='container mx-auto my-12 flex xl:justify-between max-2xl:gap-14'>
 			<div className='flex flex-col justify-between max-w-[50%]'>
 				<div className='flex flex-col'>
 					<div className='pb-9 font-azoft sm:text-[48px] xl:text-[48px] text-primaryText leading-[64px] uppercase'>
@@ -55,8 +55,17 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 					</div>
 				</div>
 			</div>
-			<div className='max-w-[656px]'>
-				<Image src={themeBg} alt='Картинка темы' priority />
+			<div className='sm:max-w-[470px] xl:max-w-[656px]'>
+				<div className='relative sm:w-[470px] sm:h-[285px] xl:w-[625px] xl:h-[285px] rounded-[26px] overflow-hidden'>
+					<Image
+						src={lecture.image.long ? lecture.image.long : defaultLectureImage}
+						alt='Картинка темы'
+						fill
+						objectFit='cover'
+						objectPosition='center'
+						priority
+					/>
+				</div>
 				<div className='flex flex-wrap gap-4 pt-12 font-gotham font-medium text-[16px] leading-[28px] items-center'>
 					{themes.main_themes.map((theme, index) => (
 						<div
