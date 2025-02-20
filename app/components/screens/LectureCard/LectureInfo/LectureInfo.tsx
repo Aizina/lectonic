@@ -1,5 +1,4 @@
 import lector from '@/assets/img/lector_avatar_example.png'
-import defaultLectureImage from '@/assets/img/theme_bg.png'
 import arrowRight from '@/assets/svg/arrow-right.svg'
 import { LectureData } from '@/shared/types/lecture.types'
 import Image from 'next/image'
@@ -56,9 +55,9 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 				</div>
 			</div>
 			<div className='max-w-[656px] max-xl:max-w-[450px]'>
-				<div className='relative w-[656px] h-[285px] max-xl:w-[450px] rounded-[26px] overflow-hidden'>
+				<div className='relative border w-[656px] h-[285px] max-xl:w-[450px] rounded-[26px] overflow-hidden'>
 					<Image
-						src={lecture.image.long ? lecture.image.long : defaultLectureImage}
+						src={lecture.image.long ? lecture.image.long : themes.image.long}
 						alt='Картинка темы'
 						fill
 						objectFit='cover'

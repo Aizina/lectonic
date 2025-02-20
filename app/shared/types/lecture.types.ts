@@ -10,14 +10,10 @@ export interface Lecture {
 	target_audience: string
 }
 
-export interface Image {
-	long: string
-	short: string
-}
-
 export interface Themes {
 	subtheme_list: string[]
 	main_themes: string[]
+	image: Image
 }
 
 export interface LectureData {
@@ -29,6 +25,11 @@ export interface LectureResponse {
 	detail: Detail
 	data: LectureData[]
 	info: Info
+}
+
+export interface Image {
+	long: string
+	short: string
 }
 
 export interface Info {
