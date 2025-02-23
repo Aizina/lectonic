@@ -39,10 +39,10 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const rawValue = e.target.value
-		const allowed = rawValue.replace(/[^А-Яа-яЁё \-]/g, '')
+		const allowed = rawValue.replace(/[^A-Za-zА-Яа-яЁё' \-]/g, '')
 		const collapsed = allowed.replace(/\s{2,}/g, ' ')
 		if (collapsed.length < rawValue.length) {
-			setNameError('Поле может содержать только буквы А-Я, а-я и символ “-”')
+			setNameError('Разрешены кириллица, латиница, пробел, дефис, апостроф.')
 		} else {
 			setNameError('')
 		}
@@ -62,7 +62,7 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 		if (!trimmed) {
 			setEmailError('Поле обязательно для заполнения')
 		} else {
-			const emailRegex = /^[^@\s]+@[^@\s]+\.(ru|com)$/i
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 			if (!emailRegex.test(trimmed)) {
 				setEmailError('Введите корректный E-mail')
 			} else {
@@ -135,7 +135,7 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 			setEmailError('Поле обязательно для заполнения')
 			isValid = false
 		} else {
-			const emailRegex = /^[^@\s]+@[^@\s]+\.(ru|com)$/i
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 			if (!emailRegex.test(email)) {
 				setEmailError('Введите корректный E-mail')
 				isValid = false
@@ -180,7 +180,7 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 					required
 					maxLength={30}
 					pattern='^[А-Яа-яЁё\s-]+$'
-					title='Разрешены только буквы русского алфавита, пробелы и дефис'
+					title='Разрешены кириллица, латиница, пробел, дефис, апостроф'
 					value={name}
 					onChange={handleNameChange}
 					onKeyDown={handleNameKeyDown}
@@ -205,8 +205,6 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
             ${emailError ? 'border border-red-500' : ''}
           `}
 					maxLength={50}
-					pattern='^(?!\s)(?!.*\s$)(?=[^@]+@[^@]+\.[^@]+).+$'
-					title='Введите корректный E-mail'
 					placeholder='E-mail*'
 				/>
 				{emailError && (
