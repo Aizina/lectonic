@@ -1,7 +1,8 @@
 import { useLectureData } from '@/hooks/useLectureInfo'
+import SubHeader from '@/ui/subheader/SubHeader'
+import { Meta } from '@/utils/Meta/Meta'
 import { FC } from 'react'
 import LectureDetails from './LectureDetails/LectureDetails'
-import LectureHeader from './LectureHeader/LectureHeader'
 import LectureInfo from './LectureInfo/LectureInfo'
 import ReviewsCarousel from './Reviews/ReviewsCarousel'
 
@@ -31,15 +32,17 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 	const { lecture, themes } = lectureData
 	return (
 		<>
-			<LectureHeader title={lecture.title} />
-			<LectureInfo lectureData={{ lecture, themes }} />
-			<LectureDetails
-				duration={lecture.duration}
-				format={lecture.format}
-				targetAudience={lecture.target_audience}
-				result={lecture.result}
-			/>
-			<ReviewsCarousel />
+			<Meta title='Карточка лекции'>
+				<SubHeader lecturer='Иван Иванов' titleLecture={lecture.title} />
+				<LectureInfo lectureData={{ lecture, themes }} />
+				<LectureDetails
+					duration={lecture.duration}
+					format={lecture.format}
+					targetAudience={lecture.target_audience}
+					result={lecture.result}
+				/>
+				<ReviewsCarousel />
+			</Meta>
 		</>
 	)
 }

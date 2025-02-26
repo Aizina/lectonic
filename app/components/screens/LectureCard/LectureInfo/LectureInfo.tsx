@@ -1,9 +1,9 @@
 import lector from '@/assets/img/lector_avatar_example.png'
 import arrowRight from '@/assets/svg/arrow-right.svg'
 import { LectureData } from '@/shared/types/lecture.types'
+import ModalOrder from '@/ui/ModalOrder/ModalOrder'
 import Image from 'next/image'
 import { FC, useState } from 'react'
-import LectureOrder from './LectureOrder/LectureOrder'
 
 interface LectureInfoProps {
 	lectureData: LectureData
@@ -32,9 +32,11 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 							<Image src={arrowRight} alt='Arrow right' />
 						</span>
 					</div>
-					<LectureOrder
+					<ModalOrder
 						isOpen={isModalOpen}
 						onClose={() => setIsModalOpen(false)}
+						modalTitle='лекцию'
+						btnVariant='Заказать лекцию'
 					/>
 					<span className='px-8 py-3 text-secondaryText text-[14px] leading-[20px]'>
 						Стоимость лекции по запросу*
@@ -58,7 +60,7 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 				<div className='relative border w-[656px] h-[285px] max-xl:w-[450px] rounded-[26px] overflow-hidden'>
 					<Image
 						src={lecture.image.long ? lecture.image.long : themes.image.long}
-						alt='Картинка темы'
+						alt='Картинка лекции'
 						fill
 						objectFit='cover'
 						objectPosition='center'
