@@ -2,11 +2,15 @@ import arrowRight from '@/assets/svg/arrow-right.svg'
 import Image from 'next/image'
 import { FC, useState } from 'react'
 
-interface LectureOrderFormProps {
+interface ModalOrderFormProps {
 	onSubmit: () => void
+	btnVariant: 'Заказать лекцию' | 'Нанять лектора'
 }
 
-const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
+const ModalOrderForm: FC<ModalOrderFormProps> = ({
+	onSubmit,
+	btnVariant,
+}) => {
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [phone, setPhone] = useState('')
@@ -293,9 +297,7 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 				type='submit'
 				className='flex justify-between items-center py-3 px-8 rounded-[52px] bg-primary hover:bg-primary-hover hover:cursor-pointer'
 			>
-				<span className='font-gotham text-white text-[24px]'>
-					Заказать лекцию
-				</span>
+				<span className='font-gotham text-white text-[24px]'>{btnVariant}</span>
 				<span className='flex items-center justify-center w-[49px] h-[49px] rounded-[24px] bg-white'>
 					<Image src={arrowRight} alt='Arrow right' />
 				</span>
@@ -304,4 +306,4 @@ const LectureOrderForm: FC<LectureOrderFormProps> = ({ onSubmit }) => {
 	)
 }
 
-export default LectureOrderForm
+export default ModalOrderForm

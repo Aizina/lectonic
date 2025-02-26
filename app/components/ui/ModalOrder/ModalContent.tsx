@@ -1,12 +1,19 @@
 import { FC } from 'react'
-import LectureOrderForm from './LectureOrderForm'
+import LectureOrderForm from './ModalOrderForm'
 
 interface ModalContentProps {
 	isOpen: boolean
+	modalTitle: 'лекцию' | 'лектора'
+	btnVariant: 'Заказать лекцию' | 'Нанять лектора'
 	onClose: () => void
 }
 
-const ModalContent: FC<ModalContentProps> = ({ isOpen, onClose }) => (
+const ModalContent: FC<ModalContentProps> = ({
+	isOpen,
+	onClose,
+	modalTitle,
+	btnVariant,
+}) => (
 	<div
 		onClick={e => e.stopPropagation()}
 		onMouseDown={e => e.stopPropagation()}
@@ -23,9 +30,9 @@ const ModalContent: FC<ModalContentProps> = ({ isOpen, onClose }) => (
 			✕
 		</button>
 		<h2 className='font-azoft text-[32px] font-bold mb-10'>
-			Оставьте заявку на лекцию
+			Оставьте заявку на {modalTitle}
 		</h2>
-		<LectureOrderForm onSubmit={onClose} />
+		<LectureOrderForm btnVariant={btnVariant} onSubmit={onClose} />
 	</div>
 )
 
