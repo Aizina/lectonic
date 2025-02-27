@@ -18,7 +18,7 @@ const TeachingPlaces: FC = () => {
           {places.map((place, i) => (
             <div
               key={i}
-              className="overflow-hidden shadow-[0px_1px_15.4px_0px_#00000005] flex-shrink-0"
+              className="overflow-hidden  flex-shrink-0"
               style={{ width: '327px', height: '84px' }}
             >
               <Image
@@ -26,7 +26,7 @@ const TeachingPlaces: FC = () => {
                 alt={`Teaching Place ${i + 1}`}
                 width={327}
                 height={84}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover shadow-[0px_1px_15.4px_0px_#00000005]"
               />
             </div>
           ))}
