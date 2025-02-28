@@ -8,7 +8,6 @@ import Image from 'next/image'
 import { FC, useState } from 'react'
 import ModalOrder from '../../../ui/ModalOrder/ModalOrder'
 
-
 const LecturerInfo: FC = () => {
 	const [regaliaOpen, setRegaliaOpen] = useState(false)
 	const [experienceOpen, setExperienceOpen] = useState(false)
@@ -41,7 +40,7 @@ const LecturerInfo: FC = () => {
 								Иван Иванович Петров
 							</span>
 							<div className='relative group'>
-								<div className='w-[40px] h-[40px] bg-[#4860EF] text-[44px] 2xl:rounded-[50px] flex items-center justify-center'>
+								<div className='w-[40px] h-[40px] bg-[#4860EF] text-[44px] rounded-[50px] flex items-center justify-center'>
 									<Image src={star} alt='Знак подтверждения' />
 								</div>
 								<div
