@@ -85,7 +85,7 @@ const ReviewsCarousel: FC = () => {
 					</div>
 				</div>
 				<div className='flex gap-6 overflow-hidden'>
-					{reviews.map((review, i) => (
+					{[...reviews, ...reviews, ...reviews].map((review, i) => (
 						<div
 							key={i}
 							className={`p-6 rounded-[26px] shadow-lg bg-white w-[450px] flex-shrink-0 transition-transform duration-300 ${
