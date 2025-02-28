@@ -1,8 +1,8 @@
 import SubHeader from '@/components/ui/subheader/SubHeader'
 import { Meta } from '@/utils/Meta/Meta'
 import { FC } from 'react'
-import LecturerInfo from './LecturerInfo/LecturerInfo'
 import DetailedInfo from './DetailedInfo/DetailedInfo'
+import LecturerInfo from './LecturerInfo/LecturerInfo'
 import LecturesCarousel from './LecturesCarousel/LecturesCarousel'
 import PublicationsCarousel from './PublicationsCarousel/PublicationsCarousel'
 import TeachingPlaces from './TeachingPlaces/TeachingPlaces'
@@ -20,7 +20,6 @@ const LecturerCard: FC = () => {
 						<PublicationsCarousel />
 						<TeachingPlaces />
 					</div>
-					
 				</div>
 			</Meta>
 		</>
