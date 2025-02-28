@@ -3,7 +3,7 @@ export interface Lecture {
 	type: string
 	description: string
 	title: string
-	price: string[]
+	price: PriceItem[]
 	result: string
 	format: string
 	image: Image
@@ -14,6 +14,10 @@ export interface Themes {
 	subtheme_list: string[]
 	main_themes: string[]
 	image: Image
+}
+
+export interface PriceItem {
+  [key: string]: string;
 }
 
 export interface LectureData {
