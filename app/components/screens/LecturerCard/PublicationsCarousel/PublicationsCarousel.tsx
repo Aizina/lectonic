@@ -1,6 +1,7 @@
 import placeholderImg from '@/assets/img/theme_carousel.png'
+import { truncateTextByWord } from '@/utils/truncateTextByWord'
 import Image from 'next/image'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 const publications = [
@@ -42,21 +43,42 @@ const publications = [
 	},
 ]
 
+const CARD_WIDTH = 288
+const GAP = 24
+
 const PublicationsCarousel: FC = () => {
 	const [index, setIndex] = useState(0)
 
+	const [visibleCount, setVisibleCount] = useState(3)
+
+	const maxIndex = Math.max(0, publications.length - visibleCount)
+
+	const containerWidth = visibleCount * CARD_WIDTH + (visibleCount - 1) * GAP
+
+	useEffect(() => {
+		function handleResize() {
+			if (window.innerWidth < 1536) {
+				setVisibleCount(2)
+			} else {
+				setVisibleCount(3)
+			}
+		}
+		handleResize()
+
+		window.addEventListener('resize', handleResize)
+		return () => window.removeEventListener('resize', handleResize)
+	}, [])
+
 	const handlePrev = () => {
-		setIndex(
-			prevIndex => (prevIndex - 1 + publications.length) % publications.length
-		)
+		setIndex(prev => Math.max(prev - 1, 0))
 	}
 
 	const handleNext = () => {
-		setIndex(prevIndex => (prevIndex + 1) % publications.length)
+		setIndex(prev => Math.min(prev + 1, maxIndex))
 	}
 
 	return (
-		<div className='bg-white font-gotham max-w-[1000px] w-fit'>
+		<div className='py-16 font-gotham mx-auto'>
 			<div className='mx-auto'>
 				<div className='flex justify-between items-center pb-10'>
 					<span className='text-[32px] font-bold font-azoft'>Публикации</span>
@@ -75,28 +97,37 @@ const PublicationsCarousel: FC = () => {
 						</button>
 					</div>
 				</div>
-				<div className='overflow-hidden relative w-[590px] 2xl:w-full'>
+
+				<div
+					className='max-2xl:max-w-[700px] overflow-hidden mx-auto'
+					style={{ width: containerWidth }}
+				>
 					<div
-						className='flex gap-6 transition-transform duration-300'
-						style={{ transform: `translateX(-${index * 100}%)` }}
+						className='flex transition-transform duration-300'
+						style={{
+							width: publications.length * (CARD_WIDTH + GAP),
+							transform: `translateX(-${index * (CARD_WIDTH + GAP)}px)`,
+							gap: `${GAP}px`,
+						}}
 					>
 						{publications.map((publication, i) => (
 							<div
 								key={i}
-								className='rounded-[26px] bg-white max-w-[278px] flex-shrink-0'
+								className='bg-white flex-shrink-0'
+								style={{ width: CARD_WIDTH }}
 							>
 								<Image
 									src={publication.image || placeholderImg}
 									alt={publication.title}
 									width={278}
-									height={200}
+									height={180}
 									className='rounded-[26px] w-full h-auto'
 								/>
-								<span className='text-[14px] 2xl:text-[20px] font-medium text-[#252525] mt-4 block'>
+								<span className='block mt-4 text-[20px] font-medium text-[#252525]'>
 									{publication.title}
 								</span>
-								<p className='text-[10px] 2xl:text-[16px] font-normal text-[#6B6B6B] mt-2'>
-									{publication.description}
+								<p className='mt-2 text-[16px] text-[#6B6B6B]'>
+									{truncateTextByWord(publication.description, 60)}
 								</p>
 							</div>
 						))}
