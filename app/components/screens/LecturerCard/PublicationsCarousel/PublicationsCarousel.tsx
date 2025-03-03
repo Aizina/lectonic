@@ -123,7 +123,7 @@ const PublicationsCarousel: FC = () => {
 									height={180}
 									className='rounded-[26px] w-full h-auto'
 								/>
-								<span className='block mt-4 text-[20px] font-medium text-[#252525]'>
+								<span className='min-h-[60px] block mt-4 text-[20px] font-medium text-[#252525]'>
 									{publication.title}
 								</span>
 								<p className='mt-2 text-[16px] text-[#6B6B6B]'>

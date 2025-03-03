@@ -102,7 +102,9 @@ const ReviewsCarousel: FC = () => {
 						{reviews.map((review, i) => (
 							<div
 								key={i}
-								className='p-6 rounded-[26px] shadow-lg w-[450px] flex-shrink-0 transition-transform duration-300'
+								className={`p-6 rounded-[26px] shadow-lg flex-shrink-0 transition-transform duration-300 ${
+									i === index ? 'opacity-50' : 'opacity-100 scale-95'
+								}`}
 								style={{ width: CARD_WIDTH }}
 							>
 								<span className='text-[25px] font-medium text-[#252525]'>
