@@ -29,12 +29,8 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 		priceArray.find(obj => obj['educational'] !== undefined)?.['educational'] ||
 		'по запросу'
 
-	console.log(lecture.image)
-
 	const imageSrc =
-		lecture.image === null
-			? defaultImage
-			: lecture.image.long
+		lecture.image && lecture.image.long
 			? lecture.image.long
 			: themes.image.long || defaultImage
 
@@ -64,31 +60,39 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 							btnVariant='Заказать лекцию'
 						/>
 					</div>
-					<div className='font-gotham'>
-						<div className='flex leading-5 justify-between items-center border-y-2'>
-							<span className='font-normal text-[20px] text-primaryText py-5'>
-								Некоммерческим организациям (НКО):
+					<div className='relative font-gotham'>
+						{lecture.price.length > 0 ? (
+							<>
+								<div className='flex leading-5 justify-between items-center border-y-2'>
+									<span className='font-normal text-[20px] text-primaryText py-5'>
+										Некоммерческим организациям (НКО):
+									</span>
+									<span className='font-medium text-[24px] text-secondaryText'>
+										{formatPrice(nonProfit)}
+									</span>
+								</div>
+								<div className='flex justify-between items-center border-b-2'>
+									<span className='font-normal text-[20px] text-primaryText leading-5 py-5'>
+										Бизнесу:
+									</span>
+									<span className='font-medium text-[24px] text-secondaryText'>
+										{formatPrice(corporate)}
+									</span>
+								</div>
+								<div className='flex justify-between items-center border-b-2'>
+									<span className='font-normal text-[20px] text-primaryText leading-5 py-5'>
+										Образовательным организациям:
+									</span>
+									<span className='font-medium text-[24px] text-secondaryText'>
+										{formatPrice(educational)}
+									</span>
+								</div>
+							</>
+						) : (
+							<span className='absolute bottom-16 left-8 font-normal text-[14px] text-[#6B6B6B] leading-5'>
+								Стоимость лекции по запросу*
 							</span>
-							<span className='font-medium text-[24px] text-secondaryText'>
-								{formatPrice(nonProfit)}
-							</span>
-						</div>
-						<div className='flex justify-between items-center border-b-2'>
-							<span className='font-normal text-[20px] text-primaryText leading-5 py-5'>
-								Бизнесу:
-							</span>
-							<span className='font-medium text-[24px] text-secondaryText'>
-								{formatPrice(corporate)}
-							</span>
-						</div>
-						<div className='flex justify-between items-center border-b-2'>
-							<span className='font-normal text-[20px] text-primaryText leading-5 py-5'>
-								Образовательным организациям:
-							</span>
-							<span className='font-medium text-[24px] text-secondaryText'>
-								{formatPrice(educational)}
-							</span>
-						</div>
+						)}
 					</div>
 
 					<div className='flex'>
@@ -141,7 +145,9 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData }) => {
 						Описание:
 					</span>
 					<span className='pt-5 w-full font-gotham font-normal text-[20px] leading-[28px] text-secondaryText break-words'>
-						{lecture.description}
+						{lecture.description.trim().length > 0
+							? lecture.description
+							: 'Описание отсутствует'}
 					</span>
 				</div>
 			</div>

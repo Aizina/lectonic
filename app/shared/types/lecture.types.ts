@@ -1,4 +1,4 @@
-export interface Lecture {
+export interface LectureItem {
 	duration: number
 	type: string
 	description: string
@@ -10,6 +10,11 @@ export interface Lecture {
 	target_audience: string
 }
 
+export interface Lecture {
+	id: string
+	lecture: LectureItem
+}
+
 export interface Themes {
 	subtheme_list: string[]
 	main_themes: string[]
@@ -17,11 +22,11 @@ export interface Themes {
 }
 
 export interface PriceItem {
-  [key: string]: string;
+	[key: string]: string
 }
 
 export interface LectureData {
-	lecture: Lecture
+	lecture: LectureItem
 	themes: Themes
 }
 

@@ -33,10 +33,14 @@ const LectureDetails: FC<LectureDetailsProps> = ({
 						01. Целевая аудитория
 					</h3>
 					<p className='font-normal text-base text-[#CBD3FF]'>
-						{targetAudience}
+						{targetAudience.trim().length > 0
+							? targetAudience
+							: 'Описание отсутствует'}
 					</p>
 					<h3 className='font-bold text-2xl text-[#FCFCFC]'>02. Результат</h3>
-					<p className='font-normal text-base text-[#CBD3FF]'>{result}</p>
+					<p className='font-normal text-base text-[#CBD3FF]'>
+						{result.trim().length > 0 ? result : 'Описание отсутствует'}
+					</p>
 				</div>
 				<div className='flex flex-col items-left justify-left text-[#1F1F20]'>
 					<div className='border-b border-[#1F1F20] flex flex-row justify-between items-center p-8'>

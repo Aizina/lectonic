@@ -32,7 +32,7 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 	const { lecture, themes } = lectureData
 	return (
 		<>
-			<Meta title='Карточка лекции'>
+			<Meta title={lecture.title}>
 				<SubHeader lecturer='Иван Иванов' titleLecture={lecture.title} />
 				<LectureInfo lectureData={{ lecture, themes }} />
 				<LectureDetails
