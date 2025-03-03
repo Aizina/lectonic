@@ -23,7 +23,7 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 
 	if (error || !lectureData) {
 		return (
-			<div className='container h-[700px] flex justify-center items-center mx-auto my-12 p-4 font-azoft uppercase font-bold text-[48px]'>
+			<div className='container h-[700px] flex justify-center items-center mx-auto my-12 p-4 font-azoft uppercase font-bold text-[48px] text-center'>
 				Произошла ошибка: {error || 'Данных о лекции нет.'}
 			</div>
 		)
