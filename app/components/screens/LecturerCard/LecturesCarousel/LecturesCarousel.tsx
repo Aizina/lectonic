@@ -1,52 +1,19 @@
 import placeholderImg from '@/assets/img/theme_carousel.png'
+import { Lecture } from '@/shared/types/lecture.types'
 import { truncateTextByWord } from '@/utils/truncateTextByWord'
 import Image from 'next/image'
+import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-const lectures = [
-	{
-		title: 'Цифровая трансформация: Реальные кейсы',
-		description:
-			'Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений.',
-		image: '',
-	},
-	{
-		title: 'Цифровая трансформация: Реальные кейсы',
-		description:
-			'Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений.',
-		image: '',
-	},
-	{
-		title: 'Цифровая трансформация: Реальные кейсы',
-		description:
-			'Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений.',
-		image: '',
-	},
-	{
-		title: 'Цифровая трансформация: Реальные кейсы',
-		description:
-			'Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений.',
-		image: '',
-	},
-	{
-		title: 'Цифровая трансформация: Реальные кейсы',
-		description:
-			'Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений.',
-		image: '',
-	},
-	{
-		title: 'Цифровая трансформация: Реальные кейсы',
-		description:
-			'Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений. Погрузитесь в практический опыт внедрения цифровых решений.',
-		image: '',
-	},
-]
+interface LecturesCarouselProps {
+	lectures: Lecture[]
+}
 
 const CARD_WIDTH = 288
 const GAP = 24
 
-const LecturesCarousel: FC = () => {
+const LecturesCarousel: FC<LecturesCarouselProps> = ({ lectures }) => {
 	const [index, setIndex] = useState(0)
 
 	const [visibleCount, setVisibleCount] = useState(3)
@@ -112,26 +79,30 @@ const LecturesCarousel: FC = () => {
 							gap: `${GAP}px`,
 						}}
 					>
-						{lectures.map((lecture, i) => (
-							<div
-								key={i}
-								className='bg-white flex-shrink-0'
-								style={{ width: CARD_WIDTH }}
-							>
-								<Image
-									src={lecture.image || placeholderImg}
-									alt={lecture.title}
-									width={278}
-									height={180}
-									className='rounded-[26px] w-full h-auto'
-								/>
-								<span className='min-h-[60px] block mt-4 text-[20px] font-medium text-[#252525]'>
-									{lecture.title}
-								</span>
-								<p className='mt-2 text-[16px] text-[#6B6B6B]'>
-									{truncateTextByWord(lecture.description, 60)}
-								</p>
-							</div>
+						{lectures.map(lecture => (
+							<Link href={`/lecture/${lecture.id}`} key={lecture.id}>
+								<div
+									className='bg-white flex-shrink-0'
+									style={{ width: CARD_WIDTH }}
+								>
+									<div className='relative w-[288px] h-[199px]'>
+										<Image
+											src={lecture.lecture.image.long || placeholderImg}
+											alt={lecture.lecture.title}
+											fill
+											className='rounded-[26px] w-full h-auto border'
+										/>
+									</div>
+									<span className='min-h-[60px] block mt-4 text-[20px] font-medium text-[#252525]'>
+										{lecture.lecture.title}
+									</span>
+									<p className='mt-2 text-[16px] text-[#6B6B6B]'>
+										{lecture.lecture.description.trim().length > 0
+											? truncateTextByWord(lecture.lecture.description, 60)
+											: 'Описание отсутствует'}
+									</p>
+								</div>
+							</Link>
 						))}
 					</div>
 				</div>

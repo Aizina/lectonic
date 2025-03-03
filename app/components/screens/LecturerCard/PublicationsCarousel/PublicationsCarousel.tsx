@@ -1,52 +1,20 @@
 import placeholderImg from '@/assets/img/theme_carousel.png'
+import { Publication } from '@/shared/types/lecturer.types'
 import { truncateTextByWord } from '@/utils/truncateTextByWord'
 import Image from 'next/image'
 import { FC, useEffect, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-const publications = [
-	{
-		title: 'Современные технологии в образовании',
-		description:
-			'Как новые технологии помогают улучшить процесс обучения и сделать его более эффективным.',
-		image: '',
-	},
-	{
-		title: 'Психология мотивации',
-		description:
-			'Как мотивировать себя и других на достижение высоких результатов.',
-		image: '',
-	},
-	{
-		title: 'Дизайн мышления',
-		description:
-			'Применение методологии дизайн-мышления для решения сложных задач.',
-		image: '',
-	},
-	{
-		title: 'Современные технологии в образовании',
-		description:
-			'Как новые технологии помогают улучшить процесс обучения и сделать его более эффективным.',
-		image: '',
-	},
-	{
-		title: 'Психология мотивации',
-		description:
-			'Как мотивировать себя и других на достижение высоких результатов.',
-		image: '',
-	},
-	{
-		title: 'Дизайн мышления',
-		description:
-			'Применение методологии дизайн-мышления для решения сложных задач.',
-		image: '',
-	},
-]
+interface PublicationsCarouselProps {
+	publications: Publication[]
+}
 
 const CARD_WIDTH = 288
 const GAP = 24
 
-const PublicationsCarousel: FC = () => {
+const PublicationsCarousel: FC<PublicationsCarouselProps> = ({
+	publications,
+}) => {
 	const [index, setIndex] = useState(0)
 
 	const [visibleCount, setVisibleCount] = useState(3)
@@ -116,18 +84,28 @@ const PublicationsCarousel: FC = () => {
 								className='bg-white flex-shrink-0'
 								style={{ width: CARD_WIDTH }}
 							>
-								<Image
-									src={publication.image || placeholderImg}
-									alt={publication.title}
-									width={278}
-									height={180}
-									className='rounded-[26px] w-full h-auto'
-								/>
+								<div className='relative w-[288px] h-[199px]'>
+									<Image
+										src={
+											publication.publication.image.long ||
+											publication.publication.image.short ||
+											placeholderImg
+										}
+										alt={publication.publication.title}
+										fill
+										className='rounded-[26px] w-full h-auto border'
+									/>
+								</div>
 								<span className='min-h-[60px] block mt-4 text-[20px] font-medium text-[#252525]'>
-									{publication.title}
+									{publication.publication.title}
 								</span>
 								<p className='mt-2 text-[16px] text-[#6B6B6B]'>
-									{truncateTextByWord(publication.description, 60)}
+									{publication.publication.description.trim().length > 0
+										? truncateTextByWord(
+												publication.publication.description,
+												60
+										  )
+										: 'Описание отсутствует'}
 								</p>
 							</div>
 						))}
