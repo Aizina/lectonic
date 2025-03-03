@@ -2,11 +2,15 @@ import lecturer from '@/assets/img/lecturer.png'
 import arrowDown from '@/assets/svg/arrow-down.svg'
 import arrowRight from '@/assets/svg/arrow-right.svg'
 import arrowUp from '@/assets/svg/arrow-up.svg'
+import check from '@/assets/svg/check.svg'
+import facebook from '@/assets/svg/facebook.svg'
 import mapPin from '@/assets/svg/map-pin.svg'
-import star from '@/assets/svg/Star.svg'
+import star from '@/assets/svg/Star 1.svg'
+import twitter from '@/assets/svg/twitter-alt.svg'
+import youtube from '@/assets/svg/youtube.svg'
+import ModalOrder from '@/ui/ModalOrder/ModalOrder'
 import Image from 'next/image'
 import { FC, useState } from 'react'
-import ModalOrder from '../../../ui/ModalOrder/ModalOrder'
 
 const LecturerInfo: FC = () => {
 	const [regaliaOpen, setRegaliaOpen] = useState(false)
@@ -14,7 +18,7 @@ const LecturerInfo: FC = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	return (
 		<div className='container mx-auto my-8 flex gap-36 max-2xl:gap-20'>
-			<div className='flex flex-col max-w-[508px] gap-8'>
+			<div className='flex flex-col max-w-[508px] gap-3'>
 				<div className='relative w-[508px] h-[486px] rounded-[26px] overflow-hidden'>
 					<Image
 						src={lecturer}
@@ -32,6 +36,9 @@ const LecturerInfo: FC = () => {
 							Offline
 						</div>
 					</div>
+					<div className='absolute top-3 right-4 w-[50px] h-[50px] bg-white rounded-[50px] flex justify-center items-center'>
+						<Image src={star} alt='Награда' />
+					</div>
 				</div>
 				<div className='pl-5'>
 					<div>
@@ -41,7 +48,7 @@ const LecturerInfo: FC = () => {
 							</span>
 							<div className='relative group'>
 								<div className='w-[40px] h-[40px] bg-[#4860EF] text-[44px] rounded-[50px] flex items-center justify-center'>
-									<Image src={star} alt='Знак подтверждения' />
+									<Image src={check} alt='Знак подтверждения' />
 								</div>
 								<div
 									className={`absolute hidden group-hover:flex flex-col items-center w-[300px] xl:w-[463px] h-[83px] px-5 py-6 bg-[#F6F9FF] rounded-[20px] shadow-lg border border-gray-200 text-sm text-[#282828] leading-5 left-[230px] -translate-x-1/2 bottom-[105%]`}
@@ -151,6 +158,11 @@ const LecturerInfo: FC = () => {
 						modalTitle='лектора'
 						btnVariant='Нанять лектора'
 					/>
+					<div className='flex gap-8 pt-12 pl-3'>
+						<Image src={facebook} alt='Facebook' />
+						<Image src={twitter} alt='Twitter' />
+						<Image src={youtube} alt='YouTube' />
+					</div>
 				</div>
 			</div>
 		</div>
