@@ -12,7 +12,7 @@ const LecturerCard: FC = () => {
 		<>
 			<Meta title='Карточка лектора'>
 				<SubHeader lecturer='Иван Иванов' />
-				<div className='container flex flex-col md:flex-row p-6 mx-auto my-8 gap-20 2xl:gap-36 '>
+				<div className='container flex flex-col md:flex-row mx-auto gap-20 2xl:gap-36 '>
 					<LecturerInfo />
 					<div className='max-2xl:max-w-[700px]'>
 						<DetailedInfo />
