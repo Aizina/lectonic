@@ -11,7 +11,7 @@ interface LectureCardProps {
 }
 
 const LectureCard: FC<LectureCardProps> = ({ id }) => {
-	const { lectureData, loading, error } = useLectureData(id)
+	const { lectureData, lecturerData, loading, error } = useLectureData(id)
 
 	if (loading) {
 		return (
@@ -21,7 +21,7 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 		)
 	}
 
-	if (error || !lectureData) {
+	if (error || !lectureData || !lecturerData) {
 		return (
 			<div className='container h-[700px] flex justify-center items-center mx-auto my-12 p-4 font-azoft uppercase font-bold text-[48px] text-center'>
 				Произошла ошибка: {error || 'Данных о лекции нет.'}
@@ -30,11 +30,24 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 	}
 
 	const { lecture, themes } = lectureData
+
+	const fullName =
+		lecturerData.lecturers[0].lecturer.first_name +
+		' ' +
+		lecturerData.lecturers[0].lecturer.last_name
+
 	return (
 		<>
 			<Meta title={lecture.title}>
-				<SubHeader lecturer='Иван Иванов' titleLecture={lecture.title} />
-				<LectureInfo lectureData={{ lecture, themes }} />
+				<SubHeader
+					lecturerId={lecturerData.lecturers[0].lecturer_id}
+					lecturer={fullName}
+					titleLecture={lecture.title}
+				/>
+				<LectureInfo
+					lectureData={{ lecture, themes }}
+					lecturerData={lecturerData.lecturers}
+				/>
 				<LectureDetails
 					duration={lecture.duration}
 					format={lecture.format}

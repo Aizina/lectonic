@@ -1,3 +1,5 @@
+import { LecturersData } from './lecturer.types'
+
 export interface LectureItem {
 	duration: number
 	type: string
@@ -32,7 +34,7 @@ export interface LectureData {
 
 export interface LectureResponse {
 	detail: Detail
-	data: LectureData[]
+	data: [LectureData, LecturersData]
 	info: Info
 }
 

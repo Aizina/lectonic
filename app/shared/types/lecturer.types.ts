@@ -38,6 +38,7 @@ export interface Lecturer {
 	confirmed: number
 	emergency_speaking: boolean
 	is_subscribed: boolean
+	teaching_locations: TeachingLocations[]
 }
 
 export interface ExperienceItem {
@@ -64,6 +65,22 @@ export interface LecturerProfile {
 	middle_name: string
 	photo_main: string
 	photo_small: string
+	specialization: string
+}
+
+export interface LecturerData {
+	lecturer: LecturerProfile
+	lecturer_id: string
+}
+
+export interface LecturersData {
+	lecturers: LecturerData[]
+}
+
+export interface TeachingLocations {
+	logo: string
+	name: string
+	position: string
 }
 
 export interface PublicationItem {
