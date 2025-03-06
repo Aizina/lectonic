@@ -19,9 +19,9 @@ const Footer: FC = () => {
 						+7 (495) 678-36-47
 					</span>
 					<div className='flex flex-row align-center gap-6'>
-						<Image src={insta} alt='insta Icon' width={44} height={44} />
-						<Image src={whatsapp} alt='insta Icon' width={44} height={44} />
-						<Image src={tg} alt='insta Icon' width={44} height={44} />
+						<Image src={insta} alt='Instagram' />
+						<Image src={whatsapp} alt='WhatsApp' />
+						<Image src={tg} alt='Telegram' />
 					</div>
 				</div>
 			</div>

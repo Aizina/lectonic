@@ -92,7 +92,9 @@ const PublicationsCarousel: FC<PublicationsCarouselProps> = ({
 											placeholderImg
 										}
 										alt={publication.publication.title}
+										sizes='(max-width: 288px) 100vw, (max-width: 1200px) 50vw, 33vw'
 										fill
+										priority
 										className='rounded-[26px] w-full h-auto border'
 									/>
 								</div>

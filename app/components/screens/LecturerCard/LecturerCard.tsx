@@ -47,7 +47,7 @@ const LecturerCard: FC<LecturerCardProps> = ({ id }) => {
 						/>
 						<LecturesCarousel lectures={lectures} />
 						<PublicationsCarousel publications={publications} />
-						<TeachingPlaces />
+						<TeachingPlaces teachingLocations={lecturer.teaching_locations} />
 					</div>
 				</div>
 			</Meta>

@@ -37,33 +37,30 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 				<div className='relative w-[508px] h-[486px] rounded-[26px] overflow-hidden'>
 					<Image
 						src={profile.photo_main || defaultAvatar}
+						className='object-cover object-center'
 						alt='Лектор'
+						sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
 						fill
-						objectFit='cover'
-						objectPosition='center'
 						priority
 					/>
-					<div className='absolute bottom-5 left-3 gap-3 flex font-gotham text-[16px] leading-[20px] font-medium text-white'>
-						{lecturer.format?.map(fmt => (
-							<div
-								key={fmt}
-								className='w-[85px] h-[40px] bg-[#2A2A2A] rounded-[20px] flex items-center justify-center'
-							>
-								{fmt}
+					<div className='absolute bottom-5 left-3 gap-3 flex font-gotham text-[16px] leading-[20px] font-medium text-[#363636]'>
+						{lecturer.emergency_speaking ? (
+							<div className='w-[184px] h-[40px] bg-[#FFBA1A] rounded-[20px] flex items-center justify-center'>
+								Спикер на завтра
 							</div>
-						))}
+						) : null}
 					</div>
 					<div className='absolute top-3 right-4 w-[50px] h-[50px] bg-white rounded-[50px] flex justify-center items-center'>
 						<Image src={star} alt='Награда' />
 					</div>
 				</div>
 				<div className='pl-5'>
-					<div>
+					<div className='flex flex-col gap-2'>
 						<div className='flex justify-between'>
 							<span className='font-azoft font-bold uppercase text-[26px] 2xl:text-[32px] leading-[44px]'>
 								{profile.first_name} {profile.middle_name} {profile.last_name}
 							</span>
-							{lecturer.confirmed === 1 ? (
+							{lecturer.confirmed === 0 ? (
 								<div className='relative group'>
 									<div className='w-[40px] h-[40px] bg-[#4860EF] text-[44px] rounded-[50px] flex items-center justify-center'>
 										<Image src={check} alt='Знак подтверждения' />
@@ -159,6 +156,23 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 								))}
 							</ul>
 						</div>
+					</div>
+					<div className='pb-20'>
+						<span className='font-gotham font-medium text-[18px] 2xl:text-[24px] leading-[30px] text-[#404040]'>
+							Проводит лекции:
+						</span>
+						<ul className='font-gotham list-disc list-outside pl-8 pt-5 text-[14px] 2xl:text-[20px] leading-[28px] text-[#6B6B6B] space-y-3'>
+							{lecturer.format.map(fmt =>
+								fmt === 'any' ? (
+									<>
+										<li>Online</li>
+										<li>Offline</li>
+									</>
+								) : (
+									<li key={fmt}>{fmt}</li>
+								)
+							)}
+						</ul>
 					</div>
 					<div
 						onClick={() => setIsModalOpen(true)}

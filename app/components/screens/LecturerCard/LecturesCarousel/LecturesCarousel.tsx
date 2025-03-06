@@ -49,7 +49,7 @@ const LecturesCarousel: FC<LecturesCarouselProps> = ({ lectures }) => {
 			<div className='mx-auto'>
 				<div className='flex justify-between items-center py-12'>
 					<span className='text-[32px] font-bold font-azoft'>
-						Лекции спикера
+						Лекции
 					</span>
 					<div className='flex gap-4'>
 						<button
@@ -90,6 +90,8 @@ const LecturesCarousel: FC<LecturesCarouselProps> = ({ lectures }) => {
 											src={lecture.lecture.image.long || placeholderImg}
 											alt={lecture.lecture.title}
 											fill
+											priority
+											sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
 											className='rounded-[26px] w-full h-auto border'
 										/>
 									</div>

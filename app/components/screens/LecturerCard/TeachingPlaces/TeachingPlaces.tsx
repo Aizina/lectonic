@@ -1,34 +1,42 @@
-import MSULogo from '@/assets/img/MSU_logo.png'
 import placeholderImg from '@/assets/img/theme_carousel.png'
-import VSELogo from '@/assets/img/VSE_logo.png' // Direct import
+import { TeachingLocations } from '@/shared/types/lecturer.types'
 import Image from 'next/image'
 import { FC } from 'react'
 
-const places = [{ image: VSELogo }, { image: MSULogo }]
+interface TeachingLocationsProps {
+	teachingLocations: TeachingLocations[]
+}
 
-const TeachingPlaces: FC = () => {
+const TeachingPlaces: FC<TeachingLocationsProps> = ({ teachingLocations }) => {
 	return (
-		<div className='bg-white font-gotham max-w-[1000px] w-fit mt-10'>
+		<div className='font-gotham mt-10 mb-28'>
 			<div className='mx-auto'>
 				<span className='text-[32px] font-bold font-azoft'>
 					Места преподавания
 				</span>
 				<div className='flex flex-wrap gap-6 mt-10'>
-					{places.map((place, i) => (
-						<div
-							key={i}
-							className='overflow-hidden  flex-shrink-0'
-							style={{ width: '327px', height: '84px' }}
-						>
-							<Image
-								src={place.image || placeholderImg}
-								alt={`Teaching Place ${i + 1}`}
-								width={327}
-								height={84}
-								className='w-full h-full object-cover shadow-[0px_1px_15.4px_0px_#00000005]'
-							/>
-						</div>
-					))}
+					{teachingLocations
+						? teachingLocations.map((place, i) => (
+								<div
+									key={i}
+									className='flex items-center px-10 gap-10 w-[944px] h-[96px] rounded-[36px] border border-[#EAEAEA]'
+								>
+									<div className='relative w-[68px] h-[68px]'>
+										<Image
+											src={place.logo || placeholderImg}
+											alt={place.name}
+											fill
+											sizes='(max-width: 288px) 100vw, (max-width: 1200px) 50vw, 33vw'
+											className='object-fill'
+										/>
+									</div>
+									<div className='flex flex-col gap-1 font-gotham font-normal justify-center text-[#6B6B6B] text-[16px] text-left'>
+										<span className='font-medium'>{place.name}</span>
+										<span>{place.position}</span>
+									</div>
+								</div>
+						  ))
+						: null}
 				</div>
 			</div>
 		</div>
