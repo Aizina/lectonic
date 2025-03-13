@@ -1,11 +1,11 @@
 import { LectureData, LectureResponse } from '@/shared/types/lecture.types'
-import { LecturersData } from '@/shared/types/lecturer.types'
+import { LecturerItem } from '@/shared/types/lecturer.types'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 export function useLectureData(lectureId?: string) {
 	const [lectureData, setLectureData] = useState<LectureData | null>(null)
-	const [lecturerData, setLecturerData] = useState<LecturersData | null>(null)
+	const [lecturerData, setLecturerData] = useState<LecturerItem | null>(null)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState<string | null>(null)
 
