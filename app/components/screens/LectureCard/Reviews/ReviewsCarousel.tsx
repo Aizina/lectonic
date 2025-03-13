@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from 'next/image'
 import { FC, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
-import stars4 from '../../../../assets/img/stars/stars4.png'
+import stars4 from '@/assets/img/stars/stars4.png'
 
 const reviews = [
 	{
@@ -69,10 +69,10 @@ const ReviewsCarousel: FC = () => {
 	}
 
 	return (
-		<div className='bg-white py-16 px-6 font-gotham'>
+		<div className='bg-white py-16 px-6 font-roboto'>
 			<div className='mx-auto'>
 				<div className='flex justify-between items-center pb-10 py-12 px-44 '>
-					<span className='text-[32px] font-bold font-azoft '>
+					<span className='text-[32px] font-bold font-roboto'>
 						Что говорят о лекции
 					</span>
 					<div className='flex gap-4'>

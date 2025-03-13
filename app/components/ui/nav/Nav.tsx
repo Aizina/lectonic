@@ -7,12 +7,12 @@ const links = [
 		path: '/',
 	},
 	{
-		name: 'Категории',
-		path: '/categories',
+		name: 'Лекции',
+		path: '/lectures',
 	},
 	{
-		name: 'Наши лекторы',
-		path: '/lectors',
+		name: 'Лекторы',
+		path: '/lecturers',
 	},
 	{
 		name: 'FAQ’s',
@@ -20,20 +20,20 @@ const links = [
 	},
 	{
 		name: 'Контакты',
-		path: '/contact',
+		path: '/contacts',
 	},
 ]
 
 const Nav: FC = () => {
 	return (
-		<nav className='flex gap-16 max-xl:gap-4 max-2xl:gap-8 font-gotham'>
+		<nav className='flex gap-16 max-xl:gap-4 max-2xl:gap-8 font-montserrat'>
 			{links.map((link, index) => {
 				return (
 					<Link
 						href={link.path}
 						key={index}
 						className={
-							'font-medium text-[17px] leading-[19.2px] text-primaryText hover:text-primary'
+							'font-medium text-[16px] leading-[19.2px] text-primaryText hover:text-primary'
 						}
 					>
 						{link.name}

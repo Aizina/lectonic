@@ -4,8 +4,8 @@ import Nav from '../nav/Nav'
 
 const Header: FC = () => {
 	return (
-		<header className='py-8 xl:py-8 text-black text-accent border-b border-gray-400'>
-			<div className='flex mx-20 justify-between items-center'>
+		<header className='py-8 xl:py-8 text-[#1F1F20] text-accent border-b border-[#8E8E8E]'>
+			<div className='container mx-auto flex justify-between items-center'>
 				<Link
 					href='/'
 					className='text-[32px] leading-[38.4px] text-primary font-bold'
@@ -15,12 +15,12 @@ const Header: FC = () => {
 				<Nav />
 				<div className='flex items-center gap-12'>
 					<Link href='/auth'>
-						<button className='font-gotham font-bold text-primary text-[24px]'>
+						<button className='font-montserrat font-medium text-primary text-[24px] leading-[136%]'>
 							Вход
 						</button>
 					</Link>
 					<Link href='/auth'>
-						<button className='bg-primary py-[20px] px-[36px] font-gotham text-[24px] rounded-[50px] text-white'>
+						<button className='bg-primary py-[16px] px-[36px] font-montserrat font-medium text-[24px] leading-[136%] rounded-[50px] text-white'>
 							Регистрация
 						</button>
 					</Link>

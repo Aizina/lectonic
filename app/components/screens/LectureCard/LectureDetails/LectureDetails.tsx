@@ -15,7 +15,7 @@ const LectureDetails: FC<LectureDetailsProps> = ({
 	result,
 }) => {
 	return (
-		<div className='w-[94vw] py-16 px-6 text-white m-auto font-gotham'>
+		<div className='w-[94vw] py-16 px-6 text-white m-auto font-roboto'>
 			<div className='p-[40px] mx-auto'>
 				<div
 					className='flex flex-col items-left justify-left md:flex-row md:justify-between md:items-center 
@@ -24,7 +24,7 @@ const LectureDetails: FC<LectureDetailsProps> = ({
 					<span className='text-xs lg:text-base font-normal text-[#565656]'>
 						Что вас ждёт?
 					</span>
-					<span className='text-lg lg:text-[32px] font-bold text-[#1F1F20] font-azoft'>
+					<span className='text-lg lg:text-[32px] font-bold text-[#1F1F20] font-roboto'>
 						Основные детали лекции
 					</span>
 				</div>
@@ -53,7 +53,9 @@ const LectureDetails: FC<LectureDetailsProps> = ({
 					</div>
 					<div className='border-b border-[#1F1F20] flex flex-row justify-between items-center p-8'>
 						<span className='text-md lg:text-2xl font-medium'>Формат</span>
-						<span className='text-3xl lg:text-[42px] font-bold'>{format}</span>
+						<span className='text-3xl lg:text-[42px] font-bold'>
+							{format.length > 1 ? 'Online и Offline' : format}
+						</span>
 					</div>
 				</div>
 			</div>

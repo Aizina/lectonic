@@ -45,30 +45,30 @@ const LecturesCarousel: FC<LecturesCarouselProps> = ({ lectures }) => {
 	}
 
 	return (
-		<div className='py-16 font-gotham mx-auto'>
+		<div className='pt-20 pb-16 mx-auto'>
 			<div className='mx-auto'>
-				<div className='flex justify-between items-center py-12'>
-					<span className='text-[32px] font-bold font-azoft'>
+				<div className='flex max-w-[910px] justify-between items-center py-6'>
+					<span className='text-[32px] font-normal leading-[124%] font-roboto uppercase'>
 						Лекции
 					</span>
-					<div className='flex gap-4'>
+					<div className='flex gap-8'>
 						<button
-							className='w-10 h-10 flex items-center justify-center rounded-full bg-black text-white'
+							className='w-10 h-10 flex items-center justify-center rounded-full bg-[#1F1F20] text-white'
 							onClick={handlePrev}
 						>
-							<FaArrowLeft size={20} />
+							<FaArrowLeft size={18} />
 						</button>
 						<button
-							className='w-10 h-10 flex items-center justify-center rounded-full bg-black text-white'
+							className='w-10 h-10 flex items-center justify-center rounded-full bg-[#1F1F20] text-white'
 							onClick={handleNext}
 						>
-							<FaArrowRight size={20} />
+							<FaArrowRight size={18} />
 						</button>
 					</div>
 				</div>
 
 				<div
-					className='max-2xl:max-w-[700px] overflow-hidden mx-auto'
+					className='max-2xl:max-w-[700px] overflow-hidden'
 					style={{ width: containerWidth }}
 				>
 					<div
@@ -95,10 +95,10 @@ const LecturesCarousel: FC<LecturesCarouselProps> = ({ lectures }) => {
 											className='rounded-[26px] w-full h-auto border'
 										/>
 									</div>
-									<span className='min-h-[60px] block mt-4 text-[20px] font-medium text-[#252525]'>
+									<span className='font-montserrat min-h-[60px] leading-[136%] block mt-4 text-[20px] font-medium text-[#404040]'>
 										{lecture.lecture.title}
 									</span>
-									<p className='mt-2 text-[16px] text-[#6B6B6B]'>
+									<p className='font-montserrat mt-2 text-[16px] text-[#6B6B6B]'>
 										{lecture.lecture.description.trim().length > 0
 											? truncateTextByWord(lecture.lecture.description, 60)
 											: 'Описание отсутствует'}

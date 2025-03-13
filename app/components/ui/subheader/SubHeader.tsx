@@ -13,13 +13,13 @@ const SubHeader: FC<SubHeaderProps> = ({
 	lecturerId,
 }) => {
 	return (
-		<div className='py-8 text-primaryText leading-[25px] border-b border-gray-400'>
-			<div className='container flex gap-2 py-4 mx-auto font-gotham  text-[21px]'>
-				<p className='font-normal text-gray-400'>Главная /</p>
+		<div className='py-8 text-primaryText leading-[136%] border-b border-[#B2B2B2]'>
+			<div className='container flex gap-2 py-4 mx-auto font-montserrat font-normal text-[20px]'>
+				<p className='font-normal text-[#8E8E8E]'>Главная /</p>
 				{!titleLecture ? (
 					<p className='font-medium'>{lecturer}</p>
 				) : (
-					<p className='font-normal text-gray-400 hover:underline'>
+					<p className='font-normal text-[#8E8E8E] hover:underline'>
 						<Link href={`/lecturer/${lecturerId}`}>{lecturer}</Link>
 					</p>
 				)}

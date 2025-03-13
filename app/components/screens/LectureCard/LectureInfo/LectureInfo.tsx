@@ -2,7 +2,7 @@ import defaultImage from '@/assets/img/theme_bg.png'
 import arrowRight from '@/assets/svg/arrow-right.svg'
 import { usePriceFormatter } from '@/hooks/usePriceFormatter'
 import { LectureData } from '@/shared/types/lecture.types'
-import { LecturerData } from '@/shared/types/lecturer.types'
+import { LecturerItem } from '@/shared/types/lecturer.types'
 import ModalOrder from '@/ui/ModalOrder/ModalOrder'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ import { FC, useEffect, useRef, useState } from 'react'
 
 interface LectureInfoProps {
 	lectureData: LectureData
-	lecturerData: LecturerData[]
+	lecturerData: LecturerItem[]
 }
 
 const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
@@ -35,12 +35,25 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
 	const nonProfit =
 		priceArray.find(obj => obj['non-profit'] !== undefined)?.['non-profit'] ||
 		'по запросу'
+
 	const corporate =
 		priceArray.find(obj => obj['corporate'] !== undefined)?.['corporate'] ||
 		'по запросу'
+
 	const educational =
 		priceArray.find(obj => obj['educational'] !== undefined)?.['educational'] ||
 		'по запросу'
+
+	const goverment =
+		priceArray.find(obj => obj['goverment'] !== undefined)?.['goverment'] ||
+		'по запросу'
+
+	const allPricesAreQuery = [
+		nonProfit,
+		corporate,
+		educational,
+		goverment,
+	].every(price => price === '' || price === 'по запросу')
 
 	const imageSrc =
 		lecture.image && lecture.image.long
@@ -56,14 +69,14 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
 				}`}
 			>
 				<div className='flex flex-col'>
-					<div className='pb-9 font-azoft sm:text-[48px] xl:text-[48px] text-primaryText leading-[64px] uppercase'>
+					<div className='pb-9 font-roboto sm:text-[48px] xl:text-[48px] text-primaryText leading-[64px] uppercase'>
 						{lecture.title}
 					</div>
 					<div
 						onClick={() => setIsModalOpen(true)}
 						className='flex justify-between items-center w-[440px] py-3 px-8 rounded-[52px] bg-primary hover:bg-primary-hover hover:cursor-pointer'
 					>
-						<span className='font-gotham text-white text-[24px]'>
+						<span className='font-montserrat text-white text-[24px]'>
 							Заказать лекцию
 						</span>
 						<span className='flex items-center justify-center w-[49px] h-[49px] rounded-[24px] bg-white'>
@@ -76,14 +89,14 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
 						modalTitle='лекцию'
 						btnVariant='Заказать лекцию'
 					/>
-					{!lecture.price.length && (
+					{allPricesAreQuery && (
 						<span className='mt-2 ml-8 text-[14px] text-[#6B6B6B] leading-5'>
 							Стоимость лекции по запросу*
 						</span>
 					)}
 				</div>
-				{lecture.price.length > 0 && (
-					<div className='font-gotham'>
+				{!allPricesAreQuery && (
+					<div className='font-montserrat'>
 						<div className='flex leading-5 justify-between items-center border-y-2'>
 							<span className='font-normal text-[20px] text-primaryText py-5'>
 								Некоммерческим организациям (НКО):
@@ -108,6 +121,14 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
 								{formatPrice(educational)}
 							</span>
 						</div>
+						<div className='flex justify-between items-center border-b-2'>
+							<span className='font-normal text-[20px] text-primaryText leading-5 py-5'>
+								Государственным организациям:
+							</span>
+							<span className='font-medium text-[24px] text-secondaryText'>
+								{formatPrice(goverment)}
+							</span>
+						</div>
 					</div>
 				)}
 				<Link href={`/lecturer/${lecturerData[0].lecturer_id}`}>
@@ -121,13 +142,13 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
 								className='object-cover'
 							/>
 						</div>
-						<div className='p-5 flex flex-col'>
-							<span className='font-azoft text-black uppercase text-[24px] leading-[32px]'>
+						<div className='max-w-[625px] p-5 flex flex-col'>
+							<span className='font-roboto text-black uppercase text-[24px] leading-[32px]'>
 								{lecturerData[0].lecturer.first_name}{' '}
 								{lecturerData[0].lecturer.middle_name}{' '}
 								{lecturerData[0].lecturer.last_name}
 							</span>
-							<span className='font-gotham text-secondaryText text-[16px]'>
+							<span className='font-montserrat text-secondaryText text-[16px]'>
 								{lecturerData[0].lecturer.specialization}
 							</span>
 						</div>
@@ -167,10 +188,10 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
 					</div>
 				</div>
 				<div className='flex flex-col mt-40'>
-					<span className='font-gotham text-[24px] leading-[28px] font-medium text-primaryText'>
+					<span className='font-roboto text-[24px] leading-[28px] font-medium text-primaryText'>
 						Описание:
 					</span>
-					<span className='pt-5 w-full font-gotham font-normal text-[20px] leading-[28px] text-secondaryText break-words'>
+					<span className='pt-5 w-full font-montserrat font-normal text-[20px] leading-[28px] text-secondaryText break-words'>
 						{lecture.description.trim().length > 0
 							? lecture.description
 							: 'Описание отсутствует'}

@@ -9,9 +9,9 @@ interface TeachingLocationsProps {
 
 const TeachingPlaces: FC<TeachingLocationsProps> = ({ teachingLocations }) => {
 	return (
-		<div className='font-gotham mt-10 mb-28'>
+		<div className='mt-10 mb-28'>
 			<div className='mx-auto'>
-				<span className='text-[32px] font-bold font-azoft'>
+				<span className='text-[32px] font-normal font-roboto uppercase leading-[124%]'>
 					Места преподавания
 				</span>
 				<div className='flex flex-wrap gap-6 mt-10'>
@@ -30,9 +30,11 @@ const TeachingPlaces: FC<TeachingLocationsProps> = ({ teachingLocations }) => {
 											className='object-fill'
 										/>
 									</div>
-									<div className='flex flex-col gap-1 font-gotham font-normal justify-center text-[#6B6B6B] text-[16px] text-left'>
-										<span className='font-medium'>{place.name}</span>
-										<span>{place.position}</span>
+									<div className='flex flex-col gap-1 font-montserrat font-normal justify-center text-[16px] text-left leading-[136%]'>
+										<span className='font-medium text-[#3E3E3E]'>
+											{place.name}
+										</span>
+										<span className='text-[#6B6B6B]'>{place.position}</span>
 									</div>
 								</div>
 						  ))

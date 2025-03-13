@@ -17,7 +17,7 @@ const LecturerCard: FC<LecturerCardProps> = ({ id }) => {
 
 	if (loading) {
 		return (
-			<div className='container h-[700px] flex justify-center items-center mx-auto my-12 p-4 font-azoft uppercase font-bold text-[48px]'>
+			<div className='container h-[700px] flex justify-center items-center mx-auto my-12 p-4 font-roboto uppercase font-bold text-[48px]'>
 				Загрузка данных...
 			</div>
 		)
@@ -25,7 +25,7 @@ const LecturerCard: FC<LecturerCardProps> = ({ id }) => {
 
 	if (error || !data) {
 		return (
-			<div className='container h-[700px] flex justify-center items-center mx-auto my-12 p-4 font-azoft uppercase font-bold text-[48px] text-center'>
+			<div className='container h-[700px] flex justify-center items-center mx-auto my-12 p-4 font-roboto uppercase font-bold text-[48px] text-center'>
 				Произошла ошибка: {error || 'Данных о лекторе нет.'}
 			</div>
 		)

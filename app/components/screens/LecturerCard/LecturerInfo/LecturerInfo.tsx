@@ -43,7 +43,7 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 						fill
 						priority
 					/>
-					<div className='absolute bottom-5 left-3 gap-3 flex font-gotham text-[16px] leading-[20px] font-medium text-[#363636]'>
+					<div className='absolute bottom-5 left-3 gap-3 flex font-montserrat text-[16px] leading-[20px] font-medium text-[#363636]'>
 						{lecturer.emergency_speaking ? (
 							<div className='w-[184px] h-[40px] bg-[#FFBA1A] rounded-[20px] flex items-center justify-center'>
 								Спикер на завтра
@@ -57,7 +57,7 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 				<div className='pl-5'>
 					<div className='flex flex-col gap-2'>
 						<div className='flex justify-between'>
-							<span className='font-azoft font-bold uppercase text-[26px] 2xl:text-[32px] leading-[44px]'>
+							<span className='font-roboto font-normal uppercase text-[26px] 2xl:text-[32px] leading-[124%]'>
 								{profile.first_name} {profile.middle_name} {profile.last_name}
 							</span>
 							{lecturer.confirmed === 0 ? (
@@ -68,7 +68,7 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 									<div
 										className={`absolute hidden group-hover:flex flex-col items-center w-[300px] xl:w-[463px] h-[83px] px-5 py-6 bg-[#F6F9FF] rounded-[20px] shadow-lg border border-gray-200 text-sm text-[#282828] leading-5 left-[230px] -translate-x-1/2 bottom-[105%]`}
 									>
-										<p className='font-gotham font-normal text-[10px] 2xl:text-[14px] leading-5 text-[#6B6B6B]'>
+										<p className='font-montserrat font-normal text-[10px] 2xl:text-[14px] leading-[136%] text-[#6B6B6B]'>
 											Профиль прошёл верификацию экспертами Лектоника — проверка
 											документов и рекомендаций
 										</p>
@@ -79,14 +79,14 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 								</div>
 							) : null}
 						</div>
-						<span className='font-gotham font-normal text-[14px] 2xl:text-[20px] leading-[28px] text-secondaryText'>
+						<span className='font-montserrat font-normal text-[14px] 2xl:text-[20px] leading-[136%] text-secondaryText'>
 							{lecturer.specialization}
 						</span>
 					</div>
-					<div className='border-b-2'>
+					<div className='border-b-2 mt-10'>
 						<div className='flex gap-3 py-8'>
 							<Image src={mapPin} alt='Значок геолокации' />
-							<span className='font-gotham font-medium text-[14px] 2xl:text-[20px] leading-[24px] text-[#282828]'>
+							<span className='font-montserrat font-medium text-[14px] 2xl:text-[20px] leading-[136%] text-[#282828]'>
 								{lecturer.location}
 							</span>
 						</div>
@@ -96,7 +96,7 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 							className='flex gap-3 py-8 items-center justify-between cursor-pointer'
 							onClick={() => setRegaliaOpen(!regaliaOpen)}
 						>
-							<span className='font-gotham font-medium text-[18px] 2xl:text-[24px] leading-[30px] text-[#404040]'>
+							<span className='font-montserrat font-medium text-[18px] 2xl:text-[24px] leading-[136%] text-[#404040]'>
 								Регалии:
 							</span>
 							<div className='flex items-center justify-center'>
@@ -117,7 +117,7 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
                 ${regaliaOpen ? 'max-h-[500px] py-4' : 'max-h-0 py-0'}
               `}
 						>
-							<ul className='font-gotham list-disc list-outside pl-2 text-[14px] 2xl:text-[20px] leading-[28px] text-[#6B6B6B] space-y-3'>
+							<ul className='font-montserrat list-disc list-outside pl-2 text-[14px] 2xl:text-[20px] leading-[136%] text-[#6B6B6B] space-y-3'>
 								{lecturer.achievements.map((achievement, index) => (
 									<li key={index}>{achievement.achievement}</li>
 								))}
@@ -129,7 +129,7 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 							className='flex gap-3 py-8 items-center justify-between cursor-pointer'
 							onClick={() => setExperienceOpen(!experienceOpen)}
 						>
-							<span className='font-gotham font-medium text-[18px] 2xl:text-[24px] leading-[30px] text-[#404040]'>
+							<span className='font-montserrat font-medium text-[18px] 2xl:text-[24px] leading-[136%] text-[#404040]'>
 								Опыт:
 							</span>
 							<div className='flex items-center justify-center'>
@@ -150,7 +150,7 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
                 ${experienceOpen ? 'max-h-[500px] py-4' : 'max-h-0 py-0'}
               `}
 						>
-							<ul className='font-gotham list-disc list-outside pl-2 text-[14px] 2xl:text-[20px] leading-[28px] text-[#6B6B6B] space-y-3'>
+							<ul className='font-montserrat list-disc list-outside pl-2 text-[14px] 2xl:text-[20px] leading-[136%] text-[#6B6B6B] space-y-3'>
 								{lecturer.experience.map((experience, index) => (
 									<li key={index}>{experience.experience}</li>
 								))}
@@ -158,10 +158,10 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 						</div>
 					</div>
 					<div className='pb-20'>
-						<span className='font-gotham font-medium text-[18px] 2xl:text-[24px] leading-[30px] text-[#404040]'>
+						<span className='font-montserrat font-medium text-[18px] 2xl:text-[24px] leading-[136%] text-[#404040]'>
 							Проводит лекции:
 						</span>
-						<ul className='font-gotham list-disc list-outside pl-8 pt-5 text-[14px] 2xl:text-[20px] leading-[28px] text-[#6B6B6B] space-y-3'>
+						<ul className='font-montserrat list-disc list-outside pl-8 pt-5 text-[14px] 2xl:text-[20px] leading-[136%] text-[#6B6B6B] space-y-3'>
 							{lecturer.format.map(fmt =>
 								fmt === 'any' ? (
 									<>
@@ -178,7 +178,7 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 						onClick={() => setIsModalOpen(true)}
 						className='flex justify-between items-center py-3 px-8 rounded-[52px] bg-primary hover:bg-primary-hover hover:cursor-pointer'
 					>
-						<span className='font-gotham text-white text-[18px] 2xl:text-[24px]'>
+						<span className='font-montserrat font-medium text-white text-[18px] 2xl:text-[24px]'>
 							Пригласить спикера
 						</span>
 						<span className='flex items-center justify-center w-[49px] h-[49px] rounded-[24px] bg-white'>
