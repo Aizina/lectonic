@@ -7,10 +7,7 @@ interface ModalOrderFormProps {
 	btnVariant: 'Заказать лекцию' | 'Нанять лектора'
 }
 
-const ModalOrderForm: FC<ModalOrderFormProps> = ({
-	onSubmit,
-	btnVariant,
-}) => {
+const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [phone, setPhone] = useState('')
@@ -21,6 +18,7 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 	const [nameError, setNameError] = useState('')
 	const [emailError, setEmailError] = useState('')
 	const [phoneError, setPhoneError] = useState('')
+	const [orgError, setOrgError] = useState('')
 
 	const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === ' ') {
@@ -102,6 +100,12 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 		}
 	}
 
+	const handleOrgBlur = () => {
+		if (!org.trim()) {
+			setOrgError('Поле обязательно для заполнения')
+		}
+	}
+
 	const MAX_ORG = 50
 	const handleOrgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		let raw = e.target.value
@@ -155,6 +159,11 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 				setPhoneError('Неверный формат номера телефона')
 				isValid = false
 			}
+		}
+
+		if (!org.trim()) {
+			setOrgError('Поле обязательно для заполнения')
+			isValid = false
 		}
 
 		if (!isValid) return
@@ -239,9 +248,15 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 						type='text'
 						value={org}
 						onChange={handleOrgChange}
-						className='w-full p-4 rounded-xl bg-gray-100 outline-none'
-						placeholder='Название организации'
+						onBlur={handleOrgBlur}
+						className={`w-full p-4 rounded-xl bg-gray-100 outline-none
+							${orgError ? 'border border-red-500' : ''}
+						`}
+						placeholder='Название организации*'
 					/>
+					{orgError && (
+						<p className='text-xs text-red-500 mt-1 ml-4'>{orgError}</p>
+					)}
 					<span className='absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-500'>
 						{org.length}/{MAX_ORG}
 					</span>
