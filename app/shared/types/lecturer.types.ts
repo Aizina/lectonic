@@ -41,6 +41,15 @@ export interface Lecturer {
 	teaching_locations: TeachingLocations[]
 }
 
+export interface LecturerItem {
+	lecturer_id: string
+	lecturer: LecturerProfile
+}
+
+export interface LecturersData {
+	lecturers: LecturerItem[]
+}
+
 export interface ExperienceItem {
 	experience: string
 }
@@ -60,21 +69,13 @@ export interface Image {
 }
 
 export interface LecturerProfile {
+	lecturer_id: string
 	first_name: string
 	last_name: string
 	middle_name: string
 	photo_main: string
 	photo_small: string
 	specialization: string
-}
-
-export interface LecturerData {
-	lecturer: LecturerProfile
-	lecturer_id: string
-}
-
-export interface LecturersData {
-	lecturers: LecturerData[]
 }
 
 export interface TeachingLocations {
