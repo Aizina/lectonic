@@ -1,4 +1,4 @@
-import { LecturerItem, LecturerProfile, LecturersData } from './lecturer.types'
+import { LecturerProfile, LecturersData } from './lecturer.types'
 
 export interface LectureItem {
 	duration: number
@@ -69,7 +69,7 @@ export interface LecturesData {
 
 export interface LectureResponse {
 	detail: Detail
-	data: [LectureData, LecturerItem]
+	data: [LectureData, LecturersData]
 	info: Info
 }
 
