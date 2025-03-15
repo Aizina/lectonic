@@ -31,6 +31,7 @@ export function useLecturerData(lecturerId?: string) {
 			})
 			.then(response => {
 				const result = response.data
+				console.log(result)
 				if (result.detail.code === 'OK' && result.data.length > 0) {
 					setData(result.data[0])
 				} else {

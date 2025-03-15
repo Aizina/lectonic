@@ -41,6 +41,7 @@ export interface Lecturer {
 	teaching_locations: TeachingLocations[]
 }
 
+
 export interface LecturerItem {
 	lecturer_id: string
 	lecturer: LecturerProfile
@@ -75,7 +76,7 @@ export interface LecturerProfile {
 	middle_name: string
 	photo_main: string
 	photo_small: string
-	specialization: string
+	specialization?: string
 }
 
 export interface TeachingLocations {
@@ -93,4 +94,34 @@ export interface PublicationItem {
 export interface Publication {
 	id: string
 	publication: PublicationItem
+}
+
+export interface LecturerDisplay {
+	id: string
+	name: string
+	about: string
+	image: string
+	specialization: string
+	themes: Themes[]
+	formats: string[]
+	emergencySpeaking: boolean
+}
+
+export interface Themes {
+	id: string
+	title: string
+}
+
+export interface LecturersResponseData {
+	lecturer_id: string,
+    lecturer: Lecturer,
+    profile_id: string,
+	profile: LecturerProfile,
+	themes: Themes[]
+}
+
+export interface allLecturersResponseData {
+	detail: LecturerDetail;
+	data: LecturersResponseData[];
+	info: LecturerInfo;
 }
