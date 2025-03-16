@@ -1,5 +1,4 @@
 import down from '@/assets/svg/down.svg'
-import rating from '@/assets/svg/rating.svg'
 import { LecturerDisplay } from '@/shared/types/lecturer.types'
 import { Meta } from '@/utils/Meta/Meta'
 import { truncateTextByWord } from '@/utils/truncateTextByWord'
@@ -30,14 +29,16 @@ const Lecturers: FC<LecturersProps> = ({
 							Каталог лекторов
 						</span>
 						<span className='font-montserrat font-normal text-[20px] text-[#6B6B6B] leading-[136%]'>
-							Выберите интересующего вас  эксперта.
+							Выберите интересующего вас эксперта.
 						</span>
 					</div>
 				</div>
 				<div>
 					{lecturers.map(lecturer => (
-						<div key={lecturer.id}
-							className='flex flex-col max-w-[1094px] gap-8 border-b border-[#B3B3B3] mb-10'>
+						<div
+							key={lecturer.id}
+							className='flex flex-col max-w-[1094px] gap-8 border-b border-[#B3B3B3] mb-10'
+						>
 							<div className='flex flex-row gap-6 justify-between items-start'>
 								<div className='flex gap-6'>
 									<div className='relative w-[163px] h-[156px]'>
@@ -51,21 +52,11 @@ const Lecturers: FC<LecturersProps> = ({
 									</div>
 
 									<div className='max-w-[745px] flex flex-col gap-3'>
-										<div className='flex gap-2'>
-											<span className='font-montserrat text-[20px] text-[#1E1E1E]'>0</span>
-											<Image
-											src={rating}
-											width={16}
-											height={16}
-											alt='Рейтинг'
-											style={{ width: 'auto', height: 'auto' }}
-											/>
-										</div>
-
 										<span
 											className={`font-roboto text-[24px] leading-[136%] uppercase ${
-											lecturer.name.length < 50 ? 'mb-[30px]' : ''
-											}`}>
+												lecturer.name.length < 50 ? 'mb-[74px]' : ''
+											}`}
+										>
 											{lecturer.name}
 										</span>
 
@@ -73,8 +64,8 @@ const Lecturers: FC<LecturersProps> = ({
 											<div className='flex gap-5'>
 												{lecturer.themes.map((theme, index) => (
 													<div
-													key={theme.id ?? index}
-													className='py-1 px-5 bg-[#F7F7F7] text-primaryText rounded-[50px] text-[10px] 2xl:text-[16px] leading-7 font-medium'
+														key={theme.id ?? index}
+														className='py-1 px-5 bg-[#F7F7F7] text-primaryText rounded-[50px] text-[10px] 2xl:text-[16px] leading-7 font-medium'
 													>
 														{theme.title}
 													</div>
@@ -86,7 +77,7 @@ const Lecturers: FC<LecturersProps> = ({
 
 								{lecturer.emergencySpeaking && (
 									<div className='items-end bg-[#FFBA1A] rounded-[20px] py-[8px] px-[12px] font-montserrat text-[#363636] text-[14px]'>
-									Спикер на завтра
+										Спикер на завтра
 									</div>
 								)}
 							</div>
@@ -97,12 +88,12 @@ const Lecturers: FC<LecturersProps> = ({
 								</span>
 							</div>
 							<div className='flex pt-5 pb-10 justify-between'>
-								<div className='flex font-montserrat text-[16px]'>
-                                    {lecturer.formats.length > 1 ? (
-                                        <p>Проводит лекции online и offline</p>
-                                    ) : (
-                                        <p>Проводит лекции {lecturer.formats[0]}</p>
-                                    )}
+								<div className='flex font-montserrat text-[16px] items-center'>
+									{lecturer.formats.length > 1 ? (
+										<p>Проводит лекции online и offline</p>
+									) : (
+										<p>Проводит лекции {lecturer.formats[0]}</p>
+									)}
 								</div>
 								<Link href={`/lecturer/${lecturer.id}`}>
 									<div>
