@@ -31,8 +31,14 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 	const [regaliaOpen, setRegaliaOpen] = useState(false)
 	const [experienceOpen, setExperienceOpen] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState(false)
+	const hasAchievements = lecturer.achievements.some(
+		achievement => achievement.achievement.trim().length > 0
+	)
+	const hasExperience = lecturer.experience.some(
+		experience => experience.experience.trim().length > 0
+	)
 	return (
-		<div className='container mx-auto my-8 flex gap-36 max-2xl:gap-20'>
+		<div className='mx-auto my-8 flex gap-36 max-2xl:gap-20'>
 			<div className='flex flex-col max-w-[508px] gap-3'>
 				<div className='relative w-[508px] h-[486px] rounded-[26px] overflow-hidden'>
 					<Image
@@ -66,7 +72,7 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 										<Image src={check} alt='Знак подтверждения' />
 									</div>
 									<div
-										className={`absolute hidden group-hover:flex flex-col items-center w-[300px] xl:w-[463px] h-[83px] px-5 py-6 bg-[#F6F9FF] rounded-[20px] shadow-lg border border-gray-200 text-sm text-[#282828] leading-5 left-[230px] -translate-x-1/2 bottom-[105%]`}
+										className={`absolute hidden group-hover:flex flex-col items-center w-[300px] xl:w-[463px] h-[83px] px-5 py-6 bg-[#F6F9FF] rounded-[20px] shadow-lg border border-gray-200 text-sm text-[#282828] leading-5 left-[230px] -translate-x-1/2 bottom-[105%] z-10`}
 									>
 										<p className='font-montserrat font-normal text-[10px] 2xl:text-[14px] leading-[136%] text-[#6B6B6B]'>
 											Профиль прошёл верификацию экспертами Лектоника — проверка
@@ -87,13 +93,17 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 						<div className='flex gap-3 py-8'>
 							<Image src={mapPin} alt='Значок геолокации' />
 							<span className='font-montserrat font-medium text-[14px] 2xl:text-[20px] leading-[136%] text-[#282828]'>
-								{lecturer.location}
+								{lecturer.location !== '' ? lecturer.location : null}
 							</span>
 						</div>
 					</div>
 					<div className='border-b-2'>
 						<div
-							className='flex gap-3 py-8 items-center justify-between cursor-pointer'
+							className={`flex gap-3 py-8 items-center justify-between ${
+								hasAchievements
+									? 'cursor-pointer'
+									: 'pointer-events-none opacity-50'
+							}`}
 							onClick={() => setRegaliaOpen(!regaliaOpen)}
 						>
 							<span className='font-montserrat font-medium text-[18px] 2xl:text-[24px] leading-[136%] text-[#404040]'>
@@ -126,7 +136,11 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 					</div>
 					<div className='pb-10'>
 						<div
-							className='flex gap-3 py-8 items-center justify-between cursor-pointer'
+							className={`flex gap-3 py-8 items-center justify-between ${
+								hasExperience
+									? 'cursor-pointer'
+									: 'pointer-events-none opacity-50'
+							}`}
 							onClick={() => setExperienceOpen(!experienceOpen)}
 						>
 							<span className='font-montserrat font-medium text-[18px] 2xl:text-[24px] leading-[136%] text-[#404040]'>
@@ -189,17 +203,19 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 						isOpen={isModalOpen}
 						onClose={() => setIsModalOpen(false)}
 						modalTitle='лектора'
-						btnVariant='Нанять лектора'
+						btnVariant='Заказать лектора'
 					/>
 					<div className='flex gap-8 pt-12 pl-3'>
-						{lecturer.contact_media.map((contact, i) => {
-							const iconSrc = socialIcons[contact.title] || star
-							return (
-								<Link href={contact.value} key={i} target='_blank'>
-									<Image src={iconSrc} alt={contact.title} />
-								</Link>
-							)
-						})}
+						{lecturer.contact_media.length > 1
+							? lecturer.contact_media.map((contact, i) => {
+									const iconSrc = socialIcons[contact.title] || star
+									return (
+										<Link href={contact.value} key={i} target='_blank'>
+											<Image src={iconSrc} alt={contact.title} />
+										</Link>
+									)
+							  })
+							: null}
 					</div>
 				</div>
 			</div>

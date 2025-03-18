@@ -45,9 +45,13 @@ const LecturerCard: FC<LecturerCardProps> = ({ id }) => {
 							themes={themes}
 							profile={profile}
 						/>
-						<LecturesCarousel lectures={lectures} />
-						<PublicationsCarousel publications={publications} />
-						<TeachingPlaces teachingLocations={lecturer.teaching_locations} />
+						{lectures.length !== 0 ? (
+							<LecturesCarousel lectures={lectures} />
+						) : null}
+						{publications.length !== 0 ? (
+							<PublicationsCarousel publications={publications} />
+						) : null}
+						<TeachingPlaces />
 					</div>
 				</div>
 			</Meta>

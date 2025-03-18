@@ -19,14 +19,13 @@ const Lecturers: FC<LecturersProps> = ({
 	loadMore,
 	loading,
 }) => {
-	console.log(lecturers)
 	return (
 		<Meta title='Лекции'>
 			<div className='container mx-auto flex py-32 justify-between gap-10'>
 				<div className='text-left'>
 					<div className='max-w-[356px] flex flex-col gap-5'>
 						<span className='font-roboto font-medium text-[48px] leading-[125%]'>
-							Каталог лекторов
+							Лекторы
 						</span>
 						<span className='font-montserrat font-normal text-[20px] text-[#6B6B6B] leading-[136%]'>
 							Выберите интересующего вас эксперта.

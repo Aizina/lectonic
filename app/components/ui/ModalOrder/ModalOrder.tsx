@@ -6,7 +6,7 @@ import ModalOverlay from './ModalOverlay'
 interface ModalProps {
 	isOpen: boolean
 	onClose: () => void
-	btnVariant: 'Заказать лекцию' | 'Нанять лектора'
+	btnVariant: 'Заказать лекцию' | 'Заказать лектора'
 	modalTitle: 'лекцию' | 'лектора'
 }
 

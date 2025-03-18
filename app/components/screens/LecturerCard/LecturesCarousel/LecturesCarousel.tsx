@@ -51,20 +51,22 @@ const LecturesCarousel: FC<LecturesCarouselProps> = ({ lectures }) => {
 					<span className='text-[32px] font-normal leading-[124%] font-roboto uppercase'>
 						Лекции
 					</span>
-					<div className='flex gap-8'>
-						<button
-							className='w-10 h-10 flex items-center justify-center rounded-full bg-[#1F1F20] text-white'
-							onClick={handlePrev}
-						>
-							<FaArrowLeft size={18} />
-						</button>
-						<button
-							className='w-10 h-10 flex items-center justify-center rounded-full bg-[#1F1F20] text-white'
-							onClick={handleNext}
-						>
-							<FaArrowRight size={18} />
-						</button>
-					</div>
+					{lectures.length <= 3 ? null : (
+						<div className='flex gap-8'>
+							<button
+								className='w-10 h-10 flex items-center justify-center rounded-full bg-[#1F1F20] text-white'
+								onClick={handlePrev}
+							>
+								<FaArrowLeft size={18} />
+							</button>
+							<button
+								className='w-10 h-10 flex items-center justify-center rounded-full bg-[#1F1F20] text-white'
+								onClick={handleNext}
+							>
+								<FaArrowRight size={18} />
+							</button>
+						</div>
+					)}
 				</div>
 
 				<div

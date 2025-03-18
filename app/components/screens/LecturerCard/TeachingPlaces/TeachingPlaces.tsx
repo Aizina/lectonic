@@ -1,20 +1,17 @@
-import placeholderImg from '@/assets/img/theme_carousel.png'
-import { TeachingLocations } from '@/shared/types/lecturer.types'
-import Image from 'next/image'
 import { FC } from 'react'
 
-interface TeachingLocationsProps {
-	teachingLocations: TeachingLocations[]
-}
+// interface TeachingLocationsProps {
+// 	teachingLocations: TeachingLocations[]
+// }
 
-const TeachingPlaces: FC<TeachingLocationsProps> = ({ teachingLocations }) => {
+const TeachingPlaces: FC = () => {
 	return (
 		<div className='mt-10 mb-28'>
 			<div className='mx-auto'>
 				<span className='text-[32px] font-normal font-roboto uppercase leading-[124%]'>
-					Места преподавания
+					Видео
 				</span>
-				<div className='flex flex-wrap gap-6 mt-10'>
+				{/* <div className='flex flex-wrap gap-6 mt-10'>
 					{teachingLocations
 						? teachingLocations.map((place, i) => (
 								<div
@@ -39,7 +36,7 @@ const TeachingPlaces: FC<TeachingLocationsProps> = ({ teachingLocations }) => {
 								</div>
 						  ))
 						: null}
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)

@@ -29,12 +29,16 @@ const DetailedInfo: FC<DetailedInfoProps> = ({ lecturer, themes, profile }) => {
 						</div>
 					))}
 				</div>
-				<span className='max-w-[910px] font-roboto font-normal uppercase text-[32px] 2xl:text-[32px] leading-[52px] text-left pt-5 pb-3'>
-					«{lecturer.quote}»
-				</span>
-				<span className='max-w-[910px] font-montserrat font-normal text-[18px] 2xl:text-[24px] text-[#6B6B6B] text-right leading-7'>
-					– говорит {profile.first_name} {profile.last_name}
-				</span>
+				{lecturer.quote === '' ? null : (
+					<>
+						<span className='max-w-[910px] font-roboto font-normal uppercase text-[32px] 2xl:text-[32px] leading-[52px] text-left pt-5 pb-3'>
+							«{lecturer.quote}»
+						</span>
+						<span className='max-w-[910px] font-montserrat font-normal text-[18px] 2xl:text-[24px] text-[#6B6B6B] text-right leading-7'>
+							– говорит {profile.first_name} {profile.last_name}
+						</span>
+					</>
+				)}
 			</div>
 		</div>
 	)

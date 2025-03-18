@@ -4,7 +4,7 @@ import { FC, useState } from 'react'
 
 interface ModalOrderFormProps {
 	onSubmit: () => void
-	btnVariant: 'Заказать лекцию' | 'Нанять лектора'
+	btnVariant: 'Заказать лекцию' | 'Заказать лектора'
 }
 
 const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {

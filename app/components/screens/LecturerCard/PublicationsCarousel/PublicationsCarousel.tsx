@@ -52,20 +52,22 @@ const PublicationsCarousel: FC<PublicationsCarouselProps> = ({
 					<span className='font-roboto text-[32px] font-normal uppercase leading-[124%]'>
 						Публикации
 					</span>
-					<div className='flex gap-8'>
-						<button
-							className='w-10 h-10 flex items-center justify-center rounded-full bg-[#1F1F20] text-white cursor-pointer'
-							onClick={handlePrev}
-						>
-							<FaArrowLeft size={18} />
-						</button>
-						<button
-							className='w-10 h-10 flex items-center justify-center rounded-full bg-[#1F1F20] text-white cursor-pointer'
-							onClick={handleNext}
-						>
-							<FaArrowRight size={18} />
-						</button>
-					</div>
+					{publications.length <= 3 ? null : (
+						<div className='flex gap-8'>
+							<button
+								className='w-10 h-10 flex items-center justify-center rounded-full bg-[#1F1F20] text-white cursor-pointer'
+								onClick={handlePrev}
+							>
+								<FaArrowLeft size={18} />
+							</button>
+							<button
+								className='w-10 h-10 flex items-center justify-center rounded-full bg-[#1F1F20] text-white cursor-pointer'
+								onClick={handleNext}
+							>
+								<FaArrowRight size={18} />
+							</button>
+						</div>
+					)}
 				</div>
 
 				<div

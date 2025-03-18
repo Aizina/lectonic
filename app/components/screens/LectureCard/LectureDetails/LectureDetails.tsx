@@ -28,33 +28,38 @@ const LectureDetails: FC<LectureDetailsProps> = ({
 						Основные детали лекции
 					</span>
 				</div>
-				<div className='flex flex-col gap-6 2xl:gap-[2vw] p-12 my-8 mx-auto bg-[#4860EF] rounded-[32px] max-w-[820px]'>
-					<h3 className='font-bold text-2xl text-[#FCFCFC]'>
-						01. Целевая аудитория
-					</h3>
-					<p className='font-normal text-base text-[#CBD3FF]'>
-						{targetAudience.trim().length > 0
-							? targetAudience
-							: 'Описание отсутствует'}
-					</p>
-					<h3 className='font-bold text-2xl text-[#FCFCFC]'>02. Результат</h3>
-					<p className='font-normal text-base text-[#CBD3FF]'>
-						{result.trim().length > 0 ? result : 'Описание отсутствует'}
-					</p>
-				</div>
+				{targetAudience.trim().length > 0 && result.trim().length > 0 ? (
+					<div className='flex flex-col gap-6 2xl:gap-[2vw] p-12 my-8 mx-auto bg-[#4860EF] rounded-[32px] max-w-[820px]'>
+						<h3 className='font-bold text-2xl text-[#FCFCFC]'>
+							01. Целевая аудитория
+						</h3>
+						<p className='font-normal text-base text-[#CBD3FF]'>
+							{targetAudience.trim().length > 0
+								? targetAudience
+								: 'Описание отсутствует'}
+						</p>
+						<h3 className='font-bold text-2xl text-[#FCFCFC]'>02. Результат</h3>
+						<p className='font-normal text-base text-[#CBD3FF]'>
+							{result.trim().length > 0 ? result : 'Описание отсутствует'}
+						</p>
+					</div>
+				) : null}
+
 				<div className='flex flex-col items-left justify-left text-[#1F1F20]'>
 					<div className='border-b border-[#1F1F20] flex flex-row justify-between items-center p-8'>
 						<span className='text-md lg:text-2xl font-medium'>
 							Длительность
 						</span>
 						<span className='text-3xl lg:text-[42px] font-bold'>
-							{formatDuration(duration)}
+							{duration === 0 ? 90 : formatDuration(duration)}
 						</span>
 					</div>
 					<div className='border-b border-[#1F1F20] flex flex-row justify-between items-center p-8'>
 						<span className='text-md lg:text-2xl font-medium'>Формат</span>
 						<span className='text-3xl lg:text-[42px] font-bold'>
-							{format.length > 1 ? 'Online и Offline' : format}
+							{format.length > 1 || format[0].trim().length === 0
+								? 'Online'
+								: format}
 						</span>
 					</div>
 				</div>
