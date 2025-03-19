@@ -14,7 +14,7 @@ export function useLecturesData() {
 		try {
 			setLoading(true)
 
-			const url = `https://api.lectonic.skroy.ru/organization/${api.organization_id}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
+			const url = `${api.server_url}/organization/${api.organization_id}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
 
 			const headers = { 'project-id': api.project_name }
 			const response = await axios.get<LecturesResponse>(url, { headers })

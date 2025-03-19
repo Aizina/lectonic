@@ -16,7 +16,7 @@ export function useLectureData(lectureId?: string) {
 			return
 		}
 
-		const url = `https://api.lectonic.skroy.ru/lecture/${lectureId}?add_lecturer_data=true`
+		const url = `${api.server_url}/lecture/${lectureId}?add_lecturer_data=true`
 
 		setLoading(true)
 		axios

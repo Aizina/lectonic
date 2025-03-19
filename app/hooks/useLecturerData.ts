@@ -20,7 +20,7 @@ export function useLecturerData(lecturerId?: string) {
 		setLoading(true)
 		setError(null)
 
-		const url = `https://api.lectonic.skroy.ru/lecturer/${lecturerId}?add_theme_data=true&add_lecture_data=true&add_publication_data=true`
+		const url = `${api.server_url}/lecturer/${lecturerId}?add_theme_data=true&add_lecture_data=true&add_publication_data=true`
 
 		axios
 			.get<LecturerResponse>(url, {
