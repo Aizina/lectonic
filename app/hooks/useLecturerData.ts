@@ -24,7 +24,7 @@ export function useLecturerData(lecturerId?: string) {
 		axios
 			.get<LecturerResponse>(url, {
 				headers: {
-					'project-id': process.env.PROJECT_ID,
+					'project-id': process.env.NEXT_PUBLIC_PROJECT_ID,
 				},
 			})
 			.then(response => {
