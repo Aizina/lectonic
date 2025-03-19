@@ -17,13 +17,11 @@ export function useLectureData(lectureId?: string) {
 
 		const url = `https://api.lectonic.skroy.ru/lecture/${lectureId}?add_lecturer_data=true`
 
-		const projectId = '7bad8c49-6e57-4347-9e14-ebc056c21136'
-
 		setLoading(true)
 		axios
 			.get<LectureResponse>(url, {
 				headers: {
-					'project-id': projectId,
+					'project-id': process.env.NEXT_PUBLIC_PROJECT_ID,
 				},
 			})
 			.then(res => {

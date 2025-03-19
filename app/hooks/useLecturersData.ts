@@ -16,8 +16,8 @@ export function useLecturersData() {
 		try {
 			setLoading(true)
 
-			const url = `https://api.lectonic.skroy.ru/organization/2817fcea-d2b8-4e3c-b990-8c2dfc21e89f/lecturers?current_page=1&objects_per_page=${objectsNum}`
-			const headers = { 'project-id': '7bad8c49-6e57-4347-9e14-ebc056c21136' }
+			const url = `https://api.lectonic.skroy.ru/organization/${process.env.NEXT_PUBLIC_ORGANIZATION_ID}/lecturers?current_page=1&objects_per_page=${objectsNum}`
+			const headers = { 'project-id': process.env.NEXT_PUBLIC_PROJECT_ID }
 			const response = await axios.get<allLecturersResponseData>(url, {
 				headers,
 			})

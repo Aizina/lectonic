@@ -13,9 +13,9 @@ export function useLecturesData() {
 		try {
 			setLoading(true)
 
-			const url = `https://api.lectonic.skroy.ru/organization/2817fcea-d2b8-4e3c-b990-8c2dfc21e89f/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
+			const url = `https://api.lectonic.skroy.ru/organization/${process.env.NEXT_PUBLIC_ORGANIZATION_ID}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
 
-			const headers = { 'project-id': '7bad8c49-6e57-4347-9e14-ebc056c21136' }
+			const headers = { 'project-id': process.env.NEXT_PUBLIC_PROJECT_ID }
 			const response = await axios.get<LecturesResponse>(url, { headers })
 			const bundles = response.data.data
 
