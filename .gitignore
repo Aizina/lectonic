@@ -3,7 +3,6 @@
 # dependencies
 /node_modules
 /remote_file
-/api.json
 /.pnp
 .pnp.*
 .yarn/*

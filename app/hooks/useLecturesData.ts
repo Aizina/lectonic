@@ -1,7 +1,6 @@
 import { LectureDisplay, LecturesResponse } from '@/shared/types/lecture.types'
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
-import api from '../../api.json'
 
 export function useLecturesData() {
 	const [lectures, setLectures] = useState<LectureDisplay[]>([])
@@ -14,9 +13,9 @@ export function useLecturesData() {
 		try {
 			setLoading(true)
 
-			const url = `${api.server_url}/organization/${api.organization_id}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
+			const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/organization/${process.env.NEXT_PUBLIC_ORGANIZATION_ID}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
 
-			const headers = { 'project-id': api.project_name }
+			const headers = { 'project-id': process.env.NEXT_PUBLIC_PROJECT_ID }
 			const response = await axios.get<LecturesResponse>(url, { headers })
 			const bundles = response.data.data
 
