@@ -4,6 +4,7 @@ import {
 } from '@/shared/types/lecturer.types'
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
+import api from '../../api.json'
 
 export function useLecturersData() {
 	const [lecturers, setLecturers] = useState<LecturerDisplay[]>([])
@@ -16,8 +17,8 @@ export function useLecturersData() {
 		try {
 			setLoading(true)
 
-			const url = `https://api.lectonic.skroy.ru/organization/${process.env.NEXT_PUBLIC_ORGANIZATION_ID}/lecturers?current_page=1&objects_per_page=${objectsNum}`
-			const headers = { 'project-id': process.env.NEXT_PUBLIC_PROJECT_ID }
+			const url = `https://api.lectonic.skroy.ru/organization/${api.organization_id}/lecturers?current_page=1&objects_per_page=${objectsNum}`
+			const headers = { 'project-id': api.project_name }
 			const response = await axios.get<allLecturersResponseData>(url, {
 				headers,
 			})

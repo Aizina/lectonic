@@ -2,6 +2,7 @@ import { LectureData, LectureResponse } from '@/shared/types/lecture.types'
 import { LecturersData } from '@/shared/types/lecturer.types'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import api from '../../api.json'
 
 export function useLectureData(lectureId?: string) {
 	const [lectureData, setLectureData] = useState<LectureData | null>(null)
@@ -21,7 +22,7 @@ export function useLectureData(lectureId?: string) {
 		axios
 			.get<LectureResponse>(url, {
 				headers: {
-					'project-id': process.env.NEXT_PUBLIC_PROJECT_ID,
+					'project-id': api.project_name,
 				},
 			})
 			.then(res => {
