@@ -20,7 +20,7 @@ const Lecturers: FC<LecturersProps> = ({
 	loading,
 }) => {
 	return (
-		<Meta title='Лекции'>
+		<Meta title='Лекторы'>
 			<div className='container mx-auto flex py-32 justify-between gap-10'>
 				<div className='text-left'>
 					<div className='max-w-[356px] flex flex-col gap-5'>
