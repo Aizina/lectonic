@@ -4,7 +4,7 @@ import { FC } from 'react'
 const links = [
 	{
 		name: 'Главная',
-		path: '/',
+		path: 'https://lectonic.ru',
 	},
 	{
 		name: 'Лекции',

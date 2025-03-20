@@ -14,7 +14,11 @@ const LecturerPage: FC = () => {
 		)
 	}
 
-	return <LecturerCard id={id as string} />
+	return (
+		<LecturerCard
+			id={(id as string) || '2817fcea-d2b8-4e3c-b990-8c2dfc21e89f'}
+		/>
+	)
 }
 
 export default LecturerPage
