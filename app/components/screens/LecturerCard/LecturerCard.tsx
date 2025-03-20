@@ -6,7 +6,6 @@ import DetailedInfo from './DetailedInfo/DetailedInfo'
 import LecturerInfo from './LecturerInfo/LecturerInfo'
 import LecturesCarousel from './LecturesCarousel/LecturesCarousel'
 import PublicationsCarousel from './PublicationsCarousel/PublicationsCarousel'
-import TeachingPlaces from './TeachingPlaces/TeachingPlaces'
 
 interface LecturerCardProps {
 	id?: string
@@ -51,7 +50,7 @@ const LecturerCard: FC<LecturerCardProps> = ({ id }) => {
 						{publications.length !== 0 ? (
 							<PublicationsCarousel publications={publications} />
 						) : null}
-						<TeachingPlaces />
+						{/* <TeachingPlaces /> */}
 					</div>
 				</div>
 			</Meta>

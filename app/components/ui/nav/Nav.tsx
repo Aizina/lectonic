@@ -8,11 +8,11 @@ const links = [
 	},
 	{
 		name: 'Лекции',
-		path: '/lectures',
+		path: '/lectures/[id]',
 	},
 	{
 		name: 'Лекторы',
-		path: '/lecturers',
+		path: '/lecturers/[id]',
 	},
 	{
 		name: 'FAQ’s',
@@ -30,7 +30,10 @@ const Nav: FC = () => {
 			{links.map((link, index) => {
 				return (
 					<Link
-						href={link.path}
+						href={{
+							pathname: link.path,
+							query: { id: process.env.NEXT_PUBLIC_ORGANIZATION_ID },
+						}}
 						key={index}
 						className={
 							'font-medium text-[16px] leading-[19.2px] text-primaryText hover:text-primary'

@@ -5,7 +5,7 @@ import {
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 
-export function useLecturersData() {
+export function useLecturersData(organizationId?: string) {
 	const [lecturers, setLecturers] = useState<LecturerDisplay[]>([])
 	const [objectsNum, setObjectsNum] = useState<number>(4)
 	const [loading, setLoading] = useState<boolean>(true)
@@ -16,7 +16,7 @@ export function useLecturersData() {
 		try {
 			setLoading(true)
 
-			const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/organization/${process.env.NEXT_PUBLIC_ORGANIZATION_ID}/lecturers?current_page=1&objects_per_page=${objectsNum}`
+			const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/organization/${organizationId}/lecturers?current_page=1&objects_per_page=${objectsNum}`
 			const headers = { 'project-id': process.env.NEXT_PUBLIC_PROJECT_ID }
 			const response = await axios.get<allLecturersResponseData>(url, {
 				headers,

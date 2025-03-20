@@ -2,7 +2,7 @@ import { LectureDisplay, LecturesResponse } from '@/shared/types/lecture.types'
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 
-export function useLecturesData() {
+export function useLecturesData(organizationId?: string) {
 	const [lectures, setLectures] = useState<LectureDisplay[]>([])
 	const [objectsNum, setObjectsNum] = useState<number>(4)
 	const [loading, setLoading] = useState<boolean>(true)
@@ -13,7 +13,7 @@ export function useLecturesData() {
 		try {
 			setLoading(true)
 
-			const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/organization/${process.env.NEXT_PUBLIC_ORGANIZATION_ID}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
+			const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/organization/${organizationId}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
 
 			const headers = { 'project-id': process.env.NEXT_PUBLIC_PROJECT_ID }
 			const response = await axios.get<LecturesResponse>(url, { headers })

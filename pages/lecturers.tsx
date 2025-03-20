@@ -2,8 +2,12 @@ import Lecturers from '@/components/screens/Lecturers/Lecturers'
 import { useLecturersData } from '@/hooks/useLecturersData'
 import { NextPage } from 'next'
 
-const LecturersPage: NextPage = () => {
-	const { lecturers, loading, error, hasMore, loadMore } = useLecturersData()
+interface LecturersCatalogueProps {
+	id?: string
+}
+
+const LecturersPage: NextPage<LecturersCatalogueProps> = ({ id }) => {
+	const { lecturers, loading, error, hasMore, loadMore } = useLecturersData(id)
 
 	if (loading && lecturers.length === 0) {
 		return (

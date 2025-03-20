@@ -2,8 +2,12 @@ import Lectures from '@/components/screens/Lectures/Lectures'
 import { useLecturesData } from '@/hooks/useLecturesData'
 import { NextPage } from 'next'
 
-const LecturesPage: NextPage = () => {
-	const { lectures, loading, error, hasMore, loadMore } = useLecturesData()
+interface LecturesCatalogueProps {
+	id?: string
+}
+
+const LecturesPage: NextPage<LecturesCatalogueProps> = ({ id }) => {
+	const { lectures, loading, error, hasMore, loadMore } = useLecturesData(id)
 
 	if (loading && lectures.length === 0) {
 		return (
