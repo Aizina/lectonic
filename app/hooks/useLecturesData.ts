@@ -13,7 +13,11 @@ export function useLecturesData(organizationId?: string) {
 		try {
 			setLoading(true)
 
-			const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/organization/${organizationId}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
+			const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/organization/${
+				organizationId
+					? organizationId
+					: process.env.NEXT_PUBLIC_ORGANIZATION_ID
+			}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
 
 			const headers = { 'project-id': process.env.NEXT_PUBLIC_PROJECT_ID }
 			const response = await axios.get<LecturesResponse>(url, { headers })
