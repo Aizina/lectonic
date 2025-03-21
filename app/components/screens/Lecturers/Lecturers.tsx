@@ -88,7 +88,8 @@ const Lecturers: FC<LecturersProps> = ({
 							</div>
 							<div className='flex pt-5 pb-10 justify-between'>
 								<div className='flex font-montserrat text-[16px] items-center'>
-									{lecturer.formats.length > 1 ? (
+									{lecturer.formats.length > 1 ||
+									lecturer.formats[0] === 'any' ? (
 										<p>Проводит лекции online и offline</p>
 									) : (
 										<p>Проводит лекции {lecturer.formats[0]}</p>

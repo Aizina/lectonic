@@ -1,4 +1,4 @@
-import { LecturerProfile, LecturersData } from './lecturer.types'
+import { LecturerItem, LecturerProfile, LecturersData } from './lecturer.types'
 
 export interface LectureItem {
 	duration: number
@@ -73,9 +73,25 @@ export interface LectureResponse {
 	info: Info
 }
 
+export type BundlesWithOrg = [LecturesItem, ThemesItem, LecturersData]
+
+export interface LecturesWithoutOrganization {
+	id: string
+	lecture_data: LecturesData
+	lecturers: LecturerItem[]
+	themes: {
+		id: string
+		title: string
+	}[]
+}
+
+export type LecturesResponseData =
+	| BundlesWithOrg[]
+	| LecturesWithoutOrganization[]
+
 export interface LecturesResponse {
 	detail: Detail
-	data: Array<[LecturesItem, ThemesItem, LecturersData]>
+	data: LecturesResponseData
 	info: Info
 }
 

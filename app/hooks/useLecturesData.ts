@@ -1,4 +1,9 @@
-import { LectureDisplay, LecturesResponse } from '@/shared/types/lecture.types'
+import {
+	BundlesWithOrg,
+	LectureDisplay,
+	LecturesResponse,
+	LecturesWithoutOrganization,
+} from '@/shared/types/lecture.types'
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -9,63 +14,93 @@ export function useLecturesData(organizationId?: string) {
 	const [error, setError] = useState<string | null>(null)
 	const [hasMore, setHasMore] = useState<boolean>(true)
 
-	const fetchLectures = useCallback(async (objectsNum: number) => {
-		try {
-			setLoading(true)
+	const fetchLectures = useCallback(
+		async (objectsNum: number) => {
+			try {
+				setLoading(true)
 
-			const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL
+				const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL
 
-			const url = organizationId
-				? `${baseUrl}/organization/${organizationId}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
-				: `${baseUrl}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
+				const url = organizationId
+					? `${baseUrl}/organization/${organizationId}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
+					: `${baseUrl}/lectures?current_page=1&objects_per_page=${objectsNum}&add_lecturer_data=true`
 
-			const headers = { 'project-id': process.env.NEXT_PUBLIC_PROJECT_ID }
-			const response = await axios.get<LecturesResponse>(url, { headers })
-			const bundles = response.data.data
+				const headers = { 'project-id': process.env.NEXT_PUBLIC_PROJECT_ID }
+				const response = await axios.get<LecturesResponse>(url, { headers })
+				const data = response.data.data
 
-			const lecturesTransformed: LectureDisplay[] = bundles.map(
-				([lectureItem, themesItem, lecturersItem]) => ({
-					id: lectureItem.id,
-					title: lectureItem.lecture_data.title,
-					description: lectureItem.lecture_data.description,
-					image: lectureItem.lecture_data.image.long,
-					rating: lectureItem.lecture_data.rating ?? '0',
-					themes: themesItem.themes.theme_list.map(t => t.theme),
-					lecturers: lecturersItem.lecturers.map(obj => ({
-						lecturer_id: obj.lecturer_id,
-						specialization: obj.lecturer.specialization,
-						first_name: obj.lecturer.first_name,
-						last_name: obj.lecturer.last_name,
-						middle_name: obj.lecturer.middle_name,
-						photo_main: obj.lecturer.photo_main,
-						photo_small: obj.lecturer.photo_small,
-					})),
+				console.log(data)
+
+				let lecturesTransformed: LectureDisplay[] = []
+
+				if (organizationId) {
+					const bundles = data as BundlesWithOrg[]
+					lecturesTransformed = bundles.map(
+						([lectureItem, themesItem, lecturersItem]) => ({
+							id: lectureItem.id,
+							title: lectureItem.lecture_data.title,
+							description: lectureItem.lecture_data.description,
+							image: lectureItem.lecture_data.image.long,
+							rating: lectureItem.lecture_data.rating ?? '0',
+							themes: themesItem.themes.theme_list.map(t => t.theme),
+							lecturers: lecturersItem.lecturers.map(obj => ({
+								lecturer_id: obj.lecturer_id,
+								specialization: obj.lecturer.specialization,
+								first_name: obj.lecturer.first_name,
+								last_name: obj.lecturer.last_name,
+								middle_name: obj.lecturer.middle_name,
+								photo_main: obj.lecturer.photo_main,
+								photo_small: obj.lecturer.photo_small,
+							})),
+						})
+					)
+				} else {
+					const bundles = data as LecturesWithoutOrganization[]
+					lecturesTransformed = bundles.map(item => ({
+						id: item.id,
+						title: item.lecture_data.title,
+						description: item.lecture_data.description,
+						image: item.lecture_data.image.long,
+						rating: item.lecture_data.rating ?? '0',
+						themes: item.themes.map(t => t.title),
+						lecturers: item.lecturers.map(obj => ({
+							lecturer_id: obj.lecturer_id,
+							specialization: obj.lecturer.specialization,
+							first_name: obj.lecturer.first_name,
+							last_name: obj.lecturer.last_name,
+							middle_name: obj.lecturer.middle_name,
+							photo_main: obj.lecturer.photo_main,
+							photo_small: obj.lecturer.photo_small,
+						})),
+					}))
+				}
+
+				setLectures(prev => {
+					const combined = [...prev, ...lecturesTransformed]
+					const unique = combined.filter(
+						(item, index, self) =>
+							index === self.findIndex(t => t.id === item.id)
+					)
+					return unique
 				})
-			)
 
-			setLectures(prev => {
-				const combined = [...prev, ...lecturesTransformed]
-				const unique = combined.filter(
-					(item, index, self) => index === self.findIndex(t => t.id === item.id)
-				)
-				return unique
-			})
-
-			if (lecturesTransformed.length < objectsNum - 1) {
-				setHasMore(false)
-			} else {
-				setHasMore(true)
+				if (lecturesTransformed.length < objectsNum - 1) {
+					setHasMore(false)
+				} else {
+					setHasMore(true)
+				}
+			} catch (err: unknown) {
+				if (err instanceof Error) {
+					setError(err.message)
+				} else {
+					setError('Ошибка загрузки лекций')
+				}
+			} finally {
+				setLoading(false)
 			}
-		} catch (err: unknown) {
-			if (err instanceof Error) {
-				setError(err.message)
-			} else {
-				setError('Ошибка загрузки лекций')
-			}
-		} finally {
-			setLoading(false)
-		}
-	}, [])
+		},
+		[organizationId]
+	)
 
 	useEffect(() => {
 		fetchLectures(objectsNum)

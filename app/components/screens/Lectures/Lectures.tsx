@@ -1,3 +1,4 @@
+import defaultImage from '@/assets/img/theme_bg.png'
 import down from '@/assets/svg/down.svg'
 import rating from '@/assets/svg/rating.svg'
 import { LectureDisplay } from '@/shared/types/lecture.types'
@@ -51,7 +52,7 @@ const Lectures: FC<LecturesProps> = ({
 								<div className='flex gap-6'>
 									<div className='relative w-[163px] h-[156px]'>
 										<Image
-											src={lecture.image}
+											src={lecture.image || defaultImage}
 											alt='Изображение лекции'
 											fill
 											className='object-cover rounded-[26px] border'
@@ -103,50 +104,7 @@ const Lectures: FC<LecturesProps> = ({
 								</div>
 
 								<div className='flex pt-5 pb-10 justify-between'>
-									{lecture.lecturers.length > 1 ? (
-										<div
-											className='flex items-center'
-											onMouseEnter={() => setHoveredLectureId(lecture.id)}
-											onMouseLeave={() => setHoveredLectureId(null)}
-										>
-											<div className='flex -space-x-4 relative'>
-												{lecture.lecturers.slice(0, 3).map((lec, i) => (
-													<Link
-														key={lec.lecturer_id}
-														href={`/lecturer/${lec.lecturer_id}`}
-														className='relative w-[38px] h-[38px] rounded-full overflow-hidden border-2 border-white
-                                       transition-transform duration-300'
-														style={{
-															zIndex: 100 - i,
-															transform: isHovered
-																? `translateX(${(i + 1) * SHIFT_PX}px)`
-																: 'none',
-														}}
-													>
-														<Image
-															src={lec.photo_small}
-															alt='Лектор'
-															fill
-															className='object-cover'
-														/>
-													</Link>
-												))}
-											</div>
-
-											{lecture.lecturers.length > 3 && (
-												<span
-													className='ml-2 transition-transform duration-300'
-													style={{
-														transform: isHovered
-															? `translateX(${(3 + 1) * SHIFT_PX}px)`
-															: 'none',
-													}}
-												>
-													+{lecture.lecturers.length - 3} лекторов на тему
-												</span>
-											)}
-										</div>
-									) : (
+									{lecture.lecturers.length === 1 && (
 										<Link
 											href={`/lecturer/${lecture.lecturers[0].lecturer_id}`}
 										>
@@ -171,6 +129,81 @@ const Lectures: FC<LecturesProps> = ({
 												</div>
 											</div>
 										</Link>
+									)}
+
+									{lecture.lecturers.length === 2 && (
+										<div className='flex gap-6'>
+											{lecture.lecturers.map(lect => (
+												<Link
+													key={lect.lecturer_id}
+													href={`/lecturer/${lect.lecturer_id}`}
+												>
+													<div className='flex gap-3 items-center justify-between'>
+														<div className='relative w-[38px] h-[38px] rounded-full overflow-hidden'>
+															<Image
+																src={lect.photo_main}
+																alt='Лектор'
+																fill
+																className='object-cover'
+															/>
+														</div>
+														<div>
+															<div className='font-montserrat font-medium text-[14px] text-[#202020] leading-[125%]'>
+																{lect.first_name} {lect.middle_name}{' '}
+																{lect.last_name}
+															</div>
+															<div className='max-w-[850px] font-montserrat text-[14px] text-[#454545] leading-[125%]'>
+																{lect.specialization}
+															</div>
+														</div>
+													</div>
+												</Link>
+											))}
+										</div>
+									)}
+
+									{lecture.lecturers.length > 2 && (
+										<div
+											className='flex items-center'
+											onMouseEnter={() => setHoveredLectureId(lecture.id)}
+											onMouseLeave={() => setHoveredLectureId(null)}
+										>
+											<div className='flex -space-x-4 relative'>
+												{lecture.lecturers.slice(0, 3).map((lec, i) => (
+													<Link
+														key={lec.lecturer_id}
+														href={`/lecturer/${lec.lecturer_id}`}
+														className='relative w-[38px] h-[38px] rounded-full overflow-hidden border-2 border-white
+                     transition-transform duration-300'
+														style={{
+															zIndex: 100 - i,
+															transform: isHovered
+																? `translateX(${(i + 1) * SHIFT_PX}px)`
+																: 'none',
+														}}
+													>
+														<Image
+															src={lec.photo_small}
+															alt='Лектор'
+															fill
+															className='object-cover'
+														/>
+													</Link>
+												))}
+											</div>
+											{lecture.lecturers.length > 3 && (
+												<span
+													className='ml-2 transition-transform duration-300'
+													style={{
+														transform: isHovered
+															? `translateX(${(3 + 1) * SHIFT_PX}px)`
+															: 'none',
+													}}
+												>
+													+{lecture.lecturers.length - 3} лекторов на тему
+												</span>
+											)}
+										</div>
 									)}
 
 									<Link href={`/lecture/${lecture.id}`}>

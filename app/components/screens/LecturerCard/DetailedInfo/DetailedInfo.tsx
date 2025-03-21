@@ -18,16 +18,18 @@ const DetailedInfo: FC<DetailedInfoProps> = ({ lecturer, themes, profile }) => {
 					{lecturer.about}
 				</span>
 				<div className='flex gap-5 pb-8 border-b border-[#B2B2B2]'>
-					{themes.map((theme, index) => (
-						<div
-							key={index}
-							className='py-3 px-5 bg-[#F7F7F7] text-primaryText rounded-[50px]'
-						>
-							<span className='font-montserrat text-[10px] 2xl:text-[16px] leading-7 font-medium'>
-								{theme}
-							</span>
-						</div>
-					))}
+					{themes
+						? themes.map((theme, index) => (
+								<div
+									key={index}
+									className='py-3 px-5 bg-[#F7F7F7] text-primaryText rounded-[50px]'
+								>
+									<span className='font-montserrat text-[10px] 2xl:text-[16px] leading-7 font-medium'>
+										{theme}
+									</span>
+								</div>
+						  ))
+						: null}
 				</div>
 				{lecturer.quote === '' ? null : (
 					<>
