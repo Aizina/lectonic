@@ -1,8 +1,14 @@
-import LectureCard from '@/components/screens/LectureCard/LectureCard'
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 
-const LectureCardPage: NextPage = () => {
-	return <LectureCard id='bd922bd2-03da-4d30-bfbf-9b4f22fccbb7' />
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    redirect: {
+      destination: 'https://lectonic.ru/',
+      permanent: false,
+    },
+  }
 }
 
-export default LectureCardPage
+const Home: NextPage = () => null
+
+export default Home
