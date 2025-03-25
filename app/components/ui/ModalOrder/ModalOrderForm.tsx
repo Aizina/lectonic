@@ -1,6 +1,11 @@
 import arrowRight from '@/assets/svg/arrow-right.svg'
 import Image from 'next/image'
-import { FC, useState } from 'react'
+import React, { FC, useState,useRef } from 'react'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { Calendar, Clock } from 'lucide-react';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale'
 
 interface ModalOrderFormProps {
 	onSubmit: () => void
@@ -14,11 +19,17 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 	const [org, setOrg] = useState('')
 	const [message, setMessage] = useState('')
 	const [agree, setAgree] = useState(false)
+	const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+	const [selectedTime, setSelectedTime] = useState('')
+	const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+	const timeInputRef = useRef<HTMLInputElement | null>(null);
 
 	const [nameError, setNameError] = useState('')
 	const [emailError, setEmailError] = useState('')
 	const [phoneError, setPhoneError] = useState('')
 	const [orgError, setOrgError] = useState('')
+
+	
 
 	const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === ' ') {
@@ -181,6 +192,21 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 		onSubmit()
 	}
 
+	const handleCalendarClick = () => {
+		setIsCalendarOpen((prev) => !prev);
+	};
+	  
+	const handleDateChange = (date: Date | null) => {
+		setSelectedDate(date);
+		setIsCalendarOpen(false); 
+	};
+
+	const openTimePicker = () => {
+		if (timeInputRef.current) {
+			timeInputRef.current.showPicker(); 
+		}
+	};
+	
 	return (
 		<form
 			onSubmit={handleFormSubmit}
@@ -218,7 +244,7 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
             ${emailError ? 'border border-red-500' : ''}
           `}
 					maxLength={50}
-					placeholder='E-mail*'
+					placeholder='Почта*'
 				/>
 				{emailError && (
 					<p className='text-xs text-red-500 mt-1 ml-4'>{emailError}</p>
@@ -260,6 +286,88 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 					<span className='absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-500'>
 						{org.length}/{MAX_ORG}
 					</span>
+				</div>
+			</div>
+
+			<div className='mb-8 flex flex-row gap-[10px]'>
+	
+				<div className='relative mb-4'>
+				<DatePicker
+					selected={selectedDate}
+					onChange={handleDateChange}
+					dateFormat="dd.MM.yyyy"
+					placeholderText="__.__.____"
+					locale={ru}
+					showPopperArrow={false}
+					open={isCalendarOpen}
+					onClickOutside={() => setIsCalendarOpen(false)}
+					renderCustomHeader={({
+						date, decreaseMonth, increaseMonth, prevMonthButtonDisabled,
+						nextMonthButtonDisabled, decreaseYear, increaseYear,
+					}) => (
+						<div className="flex items-center justify-between px-2 py-1 rounded-t-lg">
+	
+						<button
+							type="button"
+							onClick={decreaseYear}
+							className="text-gray-700 hover:text-black"
+						>
+							«
+						</button>
+
+						<button
+							type="button"
+							onClick={decreaseMonth}
+							disabled={prevMonthButtonDisabled}
+							className="text-gray-700 hover:text-black"
+						>
+							‹
+						</button>
+
+						<span className="text-sm font-medium capitalize">
+							{format(date, 'LLLL yyyy', { locale: ru })}
+						</span>
+
+						<button
+							type="button"
+							onClick={increaseMonth}
+							disabled={nextMonthButtonDisabled}
+							className="text-gray-700 hover:text-black"
+						>
+							›
+						</button>
+
+						<button
+							type="button"
+							onClick={increaseYear}
+							className="text-gray-700 hover:text-black"
+						>
+							»
+						</button>
+						</div>
+					)}
+					showYearDropdown
+					scrollableYearDropdown
+					yearDropdownItemNumber={100} 
+					className="w-full p-4 rounded-xl bg-gray-100 outline-none border border-gray-300 focus:border-blue-500"
+					/>
+					<Calendar
+						className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'
+						onClick={handleCalendarClick}
+					/>
+				</div>
+
+				<div className='relative mb-4'>
+					<input
+					ref={timeInputRef}
+					type='time'
+					value={selectedTime}
+					onChange={(e) => setSelectedTime(e.target.value)}
+					placeholder='__:__'
+					className='w-full p-4 rounded-xl bg-gray-100 outline-none border border-gray-300 focus:border-blue-500 appearance-none pr-14'
+					/>
+					<Clock className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'
+					onClick={openTimePicker}  />
 				</div>
 			</div>
 
