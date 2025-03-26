@@ -1,18 +1,34 @@
 import arrowRight from '@/assets/svg/arrow-right.svg'
-import Image from 'next/image'
-import React, { FC, useState,useRef } from 'react'
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { Calendar, Clock } from 'lucide-react';
-import { format } from 'date-fns';
+import checkIcon from '@/assets/svg/checked.svg'
+import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
+import { Calendar, Clock } from 'lucide-react'
+import Image from 'next/image'
+import React, { FC, useRef, useState } from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 interface ModalOrderFormProps {
 	onSubmit: () => void
 	btnVariant: 'Заказать лекцию' | 'Заказать лектора'
+	isSubmitted: boolean
+	setIsSubmitted: (value: boolean) => void
+	modalTitle: 'лекцию' | 'лектора'
 }
 
-const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
+interface CalendarContainerProps {
+	children?: React.ReactNode
+	className?: string
+	onApply: () => void
+}
+
+const ModalOrderForm: FC<ModalOrderFormProps> = ({
+	onSubmit,
+	btnVariant,
+	isSubmitted,
+	setIsSubmitted,
+	modalTitle,
+}) => {
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [phone, setPhone] = useState('')
@@ -20,16 +36,58 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 	const [message, setMessage] = useState('')
 	const [agree, setAgree] = useState(false)
 	const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+	const [tempDate, setTempDate] = useState<Date | null>(null)
 	const [selectedTime, setSelectedTime] = useState('')
-	const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-	const timeInputRef = useRef<HTMLInputElement | null>(null);
+	const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+	const timeInputRef = useRef<HTMLInputElement | null>(null)
 
 	const [nameError, setNameError] = useState('')
 	const [emailError, setEmailError] = useState('')
 	const [phoneError, setPhoneError] = useState('')
 	const [orgError, setOrgError] = useState('')
+	const [dateError, setDateError] = useState('')
+	const [timeError, setTimeError] = useState('')
 
-	
+	const handleCalendarClick = () => {
+		setTempDate(selectedDate)
+		setIsCalendarOpen(true)
+	}
+
+	function CalendarContainerWithApply({
+		className,
+		children,
+		onApply,
+	}: CalendarContainerProps) {
+		return (
+			<div className={className}>
+				{children}
+				<div className='flex justify-center p-1'>
+					<button
+						onClick={onApply}
+						className='bg-primary text-white text-[16px] w-[260px] h-[42px] px-4 py-2 rounded-[50px] hover:bg-primary-hover'
+					>
+						Применить
+					</button>
+				</div>
+			</div>
+		)
+	}
+
+	const openTimePicker = () => {
+		if (timeInputRef.current) {
+			timeInputRef.current.showPicker()
+			setTimeError('')
+		}
+	}
+
+	const handleTempDateChange = (date: Date | null) => {
+		setTempDate(date)
+	}
+
+	const handleApplyDate = () => {
+		setSelectedDate(tempDate)
+		setIsCalendarOpen(false)
+	}
 
 	const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === ' ') {
@@ -125,6 +183,7 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 			raw = raw.slice(0, MAX_ORG)
 		}
 		setOrg(raw)
+		setOrgError('')
 	}
 
 	const MAX_MESSAGE = 250
@@ -177,9 +236,22 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 			isValid = false
 		}
 
+		if (!selectedDate) {
+			setDateError('Выберите дату')
+			isValid = false
+		} else {
+			setDateError('')
+		}
+
+		if (!selectedTime) {
+			setTimeError('Выберите время')
+			isValid = false
+		} else {
+			setTimeError('')
+		}
+
 		if (!isValid) return
 
-		alert('Форма отправлена!')
 		setName('')
 		setEmail('')
 		setPhone('')
@@ -189,24 +261,45 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 		setNameError('')
 		setEmailError('')
 		setPhoneError('')
-		onSubmit()
+		setOrgError('')
+		setDateError('')
+		setTimeError('')
+		setIsSubmitted(true)
 	}
 
-	const handleCalendarClick = () => {
-		setIsCalendarOpen((prev) => !prev);
-	};
-	  
-	const handleDateChange = (date: Date | null) => {
-		setSelectedDate(date);
-		setIsCalendarOpen(false); 
-	};
+	if (isSubmitted) {
+		return (
+			<div className='mt-[45%] p-6 sm:p-8 flex flex-col items-center justify-center text-center font-lato font-normal leading-[24px]'>
+				<div className='w-[64px] h-[64px] mb-4 flex items-center justify-center rounded-full bg-[#4860EF]'>
+					<Image src={checkIcon} alt='Успех' width={32} height={32} />
+				</div>
 
-	const openTimePicker = () => {
-		if (timeInputRef.current) {
-			timeInputRef.current.showPicker(); 
-		}
-	};
-	
+				<h2 className='text-[24px] leading-[40px] font-bold mb-2'>
+					ЗАЯВКА УСПЕШНО ОТПРАВЛЕНА!
+				</h2>
+				<p className='font-montserrat text-[14px] mb-6'>
+					{modalTitle === 'лектора'
+						? 'Мы свяжемся с вами в ближайшее время для уточнения деталей. Спасибо за ваш интерес к нашим лекторам!'
+						: 'Мы свяжемся с вами в ближайшее время для уточнения деталей. Спасибо за ваш интерес к нашим лекциям!'}
+				</p>
+
+				<button
+					onClick={onSubmit}
+					className='flex w-[590px] mt-72 justify-between items-center py-3 px-6 rounded-[52px] bg-primary hover:bg-primary-hover'
+				>
+					<span className='font-montserrat text-white text-[24px]'>
+						{modalTitle === 'лектора'
+							? 'Вернуться к лектору'
+							: 'Вернуться к лекции'}
+					</span>
+					<span className='flex items-center justify-center w-[40px] h-[40px] rounded-full bg-white ml-2'>
+						<Image src={arrowRight} alt='Arrow right' />
+					</span>
+				</button>
+			</div>
+		)
+	}
+
 	return (
 		<form
 			onSubmit={handleFormSubmit}
@@ -224,9 +317,9 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 					onChange={handleNameChange}
 					onKeyDown={handleNameKeyDown}
 					onBlur={handleNameBlur}
-					className={`w-full p-4 rounded-xl bg-gray-100 outline-none 
-            ${nameError ? 'border border-red-500' : ''}
-          `}
+					className={`w-full p-4 rounded-xl bg-gray-100 outline-none ${
+						nameError ? 'border border-red-500' : ''
+					}`}
 				/>
 				{nameError && (
 					<p className='text-xs text-red-500 mt-1 ml-4'>{nameError}</p>
@@ -240,9 +333,9 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 					onChange={handleEmailChange}
 					onBlur={handleEmailBlur}
 					onKeyDown={handleEmailKeyDown}
-					className={`w-full p-4 rounded-xl bg-gray-100 outline-none 
-            ${emailError ? 'border border-red-500' : ''}
-          `}
+					className={`w-full p-4 rounded-xl bg-gray-100 outline-none ${
+						emailError ? 'border border-red-500' : ''
+					}`}
 					maxLength={50}
 					placeholder='Почта*'
 				/>
@@ -257,9 +350,9 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 					value={phone}
 					onChange={handlePhoneChange}
 					onBlur={handlePhoneBlur}
-					className={`w-full p-4 rounded-xl bg-gray-100 outline-none
-            ${phoneError ? 'border border-red-500' : ''}
-          `}
+					className={`w-full p-4 rounded-xl bg-gray-100 outline-none ${
+						phoneError ? 'border border-red-500' : ''
+					}`}
 					maxLength={17}
 					placeholder='Номер телефона*'
 				/>
@@ -275,9 +368,9 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 						value={org}
 						onChange={handleOrgChange}
 						onBlur={handleOrgBlur}
-						className={`w-full p-4 rounded-xl bg-gray-100 outline-none
-							${orgError ? 'border border-red-500' : ''}
-						`}
+						className={`w-full p-4 rounded-xl bg-gray-100 outline-none ${
+							orgError ? 'border border-red-500' : ''
+						}`}
 						placeholder='Название организации*'
 					/>
 					{orgError && (
@@ -289,85 +382,115 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({ onSubmit, btnVariant }) => {
 				</div>
 			</div>
 
-			<div className='mb-8 flex flex-row gap-[10px]'>
-	
-				<div className='relative mb-4'>
-				<DatePicker
-					selected={selectedDate}
-					onChange={handleDateChange}
-					dateFormat="dd.MM.yyyy"
-					placeholderText="__.__.____"
-					locale={ru}
-					showPopperArrow={false}
-					open={isCalendarOpen}
-					onClickOutside={() => setIsCalendarOpen(false)}
-					renderCustomHeader={({
-						date, decreaseMonth, increaseMonth, prevMonthButtonDisabled,
-						nextMonthButtonDisabled, decreaseYear, increaseYear,
-					}) => (
-						<div className="flex items-center justify-between px-2 py-1 rounded-t-lg">
-	
-						<button
-							type="button"
-							onClick={decreaseYear}
-							className="text-gray-700 hover:text-black"
-						>
-							«
-						</button>
-
-						<button
-							type="button"
-							onClick={decreaseMonth}
-							disabled={prevMonthButtonDisabled}
-							className="text-gray-700 hover:text-black"
-						>
-							‹
-						</button>
-
-						<span className="text-sm font-medium capitalize">
-							{format(date, 'LLLL yyyy', { locale: ru })}
-						</span>
-
-						<button
-							type="button"
-							onClick={increaseMonth}
-							disabled={nextMonthButtonDisabled}
-							className="text-gray-700 hover:text-black"
-						>
-							›
-						</button>
-
-						<button
-							type="button"
-							onClick={increaseYear}
-							className="text-gray-700 hover:text-black"
-						>
-							»
-						</button>
+			<div className='mb-3 flex flex-row gap-[10px]'>
+				<div className='relative'>
+					<input
+						type='text'
+						readOnly
+						value={selectedDate ? selectedDate.toLocaleDateString('ru-RU') : ''}
+						className='w-[286px] h-[56px] pl-4 rounded-xl bg-gray-100 outline-none border-gray-300'
+						onClick={handleCalendarClick}
+						placeholder='Выбор даты'
+					/>
+					{isCalendarOpen && (
+						<div className='absolute z-30'>
+							<DatePicker
+								selected={tempDate}
+								onChange={handleTempDateChange}
+								dateFormat='dd.MM.yyyy'
+								inline
+								locale={ru}
+								open={isCalendarOpen}
+								onClickOutside={() => setIsCalendarOpen(false)}
+								shouldCloseOnSelect={false}
+								calendarContainer={props => (
+									<CalendarContainerWithApply
+										{...props}
+										onApply={handleApplyDate}
+									/>
+								)}
+								minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
+								calendarClassName='custom-calendar'
+								popperClassName='custom-calendar-popper'
+								renderCustomHeader={({
+									date,
+									decreaseMonth,
+									increaseMonth,
+									prevMonthButtonDisabled,
+									prevYearButtonDisabled,
+									nextMonthButtonDisabled,
+									decreaseYear,
+									increaseYear,
+								}) => (
+									<div className='flex items-center justify-between px-7 py-1 rounded-t-lg bg-white'>
+										<button
+											type='button'
+											onClick={decreaseYear}
+											disabled={prevYearButtonDisabled}
+											className='text-[20px] text-black hover:text-black'
+										>
+											«
+										</button>
+										<button
+											type='button'
+											onClick={decreaseMonth}
+											disabled={prevMonthButtonDisabled}
+											className='text-[20px] text-black hover:text-black'
+										>
+											‹
+										</button>
+										<span className='text-sm font-medium capitalize'>
+											{format(date, 'LLLL yyyy', { locale: ru })}
+										</span>
+										<button
+											type='button'
+											onClick={increaseMonth}
+											disabled={nextMonthButtonDisabled}
+											className='text-[20px] text-black hover:text-black'
+										>
+											›
+										</button>
+										<button
+											type='button'
+											onClick={increaseYear}
+											className='text-[20px] text-black hover:text-black'
+										>
+											»
+										</button>
+									</div>
+								)}
+							/>
 						</div>
 					)}
-					showYearDropdown
-					scrollableYearDropdown
-					yearDropdownItemNumber={100} 
-					className="w-full p-4 rounded-xl bg-gray-100 outline-none border border-gray-300 focus:border-blue-500"
-					/>
 					<Calendar
-						className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'
+						className={`absolute ${
+							dateError ? 'right-3 top-7' : 'right-4 top-7'
+						} -translate-y-1/2 cursor-pointer`}
 						onClick={handleCalendarClick}
 					/>
+					{dateError && (
+						<p className='text-xs text-red-500 mt-1 ml-4'>{dateError}</p>
+					)}
 				</div>
 
-				<div className='relative mb-4'>
+				<div className='relative mb-4 items-center justify-center'>
 					<input
-					ref={timeInputRef}
-					type='time'
-					value={selectedTime}
-					onChange={(e) => setSelectedTime(e.target.value)}
-					placeholder='__:__'
-					className='w-full p-4 rounded-xl bg-gray-100 outline-none border border-gray-300 focus:border-blue-500 appearance-none pr-14'
+						ref={timeInputRef}
+						type='time'
+						value={selectedTime}
+						onChange={e => setSelectedTime(e.target.value)}
+						placeholder='__:__'
+						className='w-[131px] h-[56px] pl-3 rounded-xl bg-gray-100 outline-none border-gray-300 appearance-none pr-14'
 					/>
-					<Clock className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer'
-					onClick={openTimePicker}  />
+					<Clock
+						className={`absolute ${
+							timeError ? 'right-3 top-7' : 'right-4 top-7'
+						} -translate-y-1/2 cursor-pointer`}
+						onClick={openTimePicker}
+					/>
+					{timeError && (
+						<p className='text-xs text-red-500 mt-1 ml-4'>{timeError}</p>
+					)}
 				</div>
 			</div>
 
