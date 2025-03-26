@@ -21,7 +21,7 @@ export function useLecturersData(organizationId?: string) {
 			const url = organizationId
 				? `${baseUrl}/organization/${organizationId}/lecturers?current_page=1&objects_per_page=${objectsNum}`
 				: `${baseUrl}/lecturers?current_page=1&objects_per_page=${objectsNum}`
-			const headers = { 'project-id': process.env.NEXT_PUBLIC_PROJECT_ID }
+			const headers = { 'Project-ID': process.env.NEXT_PUBLIC_PROJECT_ID }
 			const response = await axios.get<allLecturersResponseData>(url, {
 				headers,
 			})
