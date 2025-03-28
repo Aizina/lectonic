@@ -88,7 +88,7 @@ export interface LecturesWithoutOrganization {
 }
 
 export type LecturesResponseData =
-	| LecturesWithoutOrganization[]
+	| BundleWithOrg[]
 	| LecturesWithoutOrganization[]
 
 export interface LecturesResponse {
@@ -112,7 +112,7 @@ export interface Detail {
 	message: string
 }
 
-export type BundlesWithOrg = {
+export type BundleWithOrg = {
 	id: string;
 	lecture_data: {
 	  duration: number;
@@ -120,7 +120,7 @@ export type BundlesWithOrg = {
 	  description: string;
 	  title: string;
 	  price: {
-		"non-profit": string;
+		'non-profit': string;
 		corporative: string;
 		educational: string;
 		goverment: string;
@@ -137,6 +137,16 @@ export type BundlesWithOrg = {
 	  id: string;
 	  title: string;
 	}[];
-	lecturers: LecturerItem[]
+	lecturers: {
+	  lecturer_id: string;
+	  lecturer: {
+		specialization: string;
+		first_name: string;
+		last_name: string;
+		middle_name: string;
+		photo_main: string;
+		photo_small: string;
+	  };
+	}[];
   };
   

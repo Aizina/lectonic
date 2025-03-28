@@ -2,6 +2,7 @@ import {
 	LectureDisplay,
 	LecturesResponse,
 	LecturesWithoutOrganization,
+	BundleWithOrg
 } from '@/shared/types/lecture.types'
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
@@ -33,7 +34,7 @@ export function useLecturesData(organizationId?: string) {
 				let lecturesTransformed: LectureDisplay[] = []
 
 				if (organizationId) {
-					const bundles = data as LecturesWithoutOrganization[]
+					const bundles = data as BundleWithOrg[]
 					lecturesTransformed = bundles.map(item => ({
 						id: item.id,
 						title: item.lecture_data.title,
