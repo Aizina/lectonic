@@ -39,7 +39,7 @@ export function useLecturesData(organizationId?: string) {
 						title: item.lecture_data.title,
 						description: item.lecture_data.description,
 						image: item.lecture_data.image.long,
-						rating: item.lecture_data.rating ?? '0',
+						rating: '0',
 						themes: item.themes.map(t => t.title),
 						lecturers: item.lecturers.map(obj => ({
 							lecturer_id: obj.lecturer_id,

@@ -44,6 +44,10 @@ export interface ThemesItem {
 		theme_image: { long: string; short: string }[]
 	}
 }
+export interface newThemes {
+	id: string
+	title: string
+}
 
 export interface PriceItem {
 	[key: string]: string
@@ -73,8 +77,6 @@ export interface LectureResponse {
 	info: Info
 }
 
-export type BundlesWithOrg = [LecturesItem, ThemesItem, LecturersData]
-
 export interface LecturesWithoutOrganization {
 	id: string
 	lecture_data: LecturesData
@@ -86,7 +88,7 @@ export interface LecturesWithoutOrganization {
 }
 
 export type LecturesResponseData =
-	| BundlesWithOrg[]
+	| LecturesWithoutOrganization[]
 	| LecturesWithoutOrganization[]
 
 export interface LecturesResponse {
@@ -109,3 +111,32 @@ export interface Detail {
 	code: string
 	message: string
 }
+
+export type BundlesWithOrg = {
+	id: string;
+	lecture_data: {
+	  duration: number;
+	  type: string;
+	  description: string;
+	  title: string;
+	  price: {
+		"non-profit": string;
+		corporative: string;
+		educational: string;
+		goverment: string;
+	  }[];
+	  result: string;
+	  format: string[];
+	  image: {
+		long: string;
+		short: string;
+	  };
+	  target_audience: string;
+	};
+	themes: {
+	  id: string;
+	  title: string;
+	}[];
+	lecturers: LecturerItem[]
+  };
+  
