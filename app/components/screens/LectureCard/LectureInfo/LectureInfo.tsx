@@ -2,18 +2,19 @@ import defaultImage from '@/assets/img/theme_bg.png'
 import arrowRight from '@/assets/svg/arrow-right.svg'
 import { usePriceFormatter } from '@/hooks/usePriceFormatter'
 import { LectureData } from '@/shared/types/lecture.types'
-import { LecturerItem } from '@/shared/types/lecturer.types'
+import { LecturerItem,LecturerProfile } from '@/shared/types/lecturer.types'
 import ModalOrder from '@/ui/ModalOrder/ModalOrder'
 import Image from 'next/image'
-import Link from 'next/link'
 import { FC, useEffect, useRef, useState } from 'react'
+import LecturerList from '../LecturerList/LecturerList'
 
 interface LectureInfoProps {
 	lectureData: LectureData
 	lecturerData: LecturerItem[]
+	mainLecturer? : LecturerProfile
 }
 
-const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
+const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData, mainLecturer }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [smallHeight, setSmallHeight] = useState(false)
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -28,7 +29,6 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
 	}, [])
 
 	const formatPrice = usePriceFormatter()
-
 	const { lecture, themes } = lectureData
 
 	const priceArray = lecture.price
@@ -59,6 +59,7 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
 		lecture.image && lecture.image.long
 			? lecture.image.long
 			: themes.image.long || defaultImage
+
 
 	return (
 		<div className='container mx-auto my-12 flex justify-between'>
@@ -131,7 +132,7 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
 						</div>
 					</div>
 				)}
-				<Link href={`/lecturer/${lecturerData[0].lecturer_id}`}>
+				{/* <Link href={`/lecturer/${lecturerData[0].lecturer_id}`}>
 					<div className='flex'>
 						<div className='relative flex w-[102px] h-[102px] rounded-full overflow-hidden'>
 							<Image
@@ -153,7 +154,8 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData }) => {
 							</span>
 						</div>
 					</div>
-				</Link>
+				</Link> */}
+				<LecturerList mainLecturer={mainLecturer} lecturerData={lecturerData} />
 			</div>
 			<div className='flex flex-col justify-between max-w-[656px] max-xl:max-w-[450px]'>
 				<div>

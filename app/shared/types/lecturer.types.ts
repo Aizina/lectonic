@@ -24,22 +24,24 @@ export interface LecturerDataItem {
 }
 
 export interface Lecturer {
-	specialization: string
-	academic_degree: string
-	format: string[]
-	experience: ExperienceItem[]
-	achievements: AchievementItem[]
-	location: string
-	about: string
-	quote: string
-	language: string
-	contact_media: ContactMedia[]
-	lectures_conducted: number
-	confirmed: number
-	emergency_speaking: boolean
-	is_subscribed: boolean
-	teaching_locations: TeachingLocations[]
-}
+	specialization: string;
+	academic_degree: string;
+	format: string[];
+	experience: ExperienceItem[];
+	achievements: AchievementItem[];
+	location: string;
+	about: string;
+	quote: string;
+	language: string;
+	contact_media: ContactMedia[];
+	confirmed: number;
+	emergency_speaking: boolean;
+	is_subscribed: boolean;
+	lectures_conducted: number;
+	business_trip_readiness: boolean;
+	business_trip_locations: BusinessTripLocations;
+  }
+  
 
 
 export interface LecturerItem {
@@ -125,3 +127,9 @@ export interface allLecturersResponseData {
 	data: LecturersResponseData[];
 	info: LecturerInfo;
 }
+
+export interface BusinessTripLocations {
+	abroad: boolean;
+	region: boolean;
+	country: boolean;
+  }

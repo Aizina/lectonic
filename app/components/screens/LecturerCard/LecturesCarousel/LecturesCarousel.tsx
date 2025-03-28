@@ -7,13 +7,13 @@ import { FC, useEffect, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 interface LecturesCarouselProps {
-	lectures: Lecture[]
+	lectures: Lecture[];
+	lecturerId?: string; 
 }
-
 const CARD_WIDTH = 288
 const GAP = 24
 
-const LecturesCarousel: FC<LecturesCarouselProps> = ({ lectures }) => {
+const LecturesCarousel: FC<LecturesCarouselProps> = ({ lectures, lecturerId }) => {
 	const [index, setIndex] = useState(0)
 
 	const [visibleCount, setVisibleCount] = useState(3)
@@ -82,7 +82,7 @@ const LecturesCarousel: FC<LecturesCarouselProps> = ({ lectures }) => {
 						}}
 					>
 						{lectures.map(lecture => (
-							<Link href={`/lecture/${lecture.id}`} key={lecture.id}>
+							<Link href={`/lecture/${lecture.id}?lecturerId=${lecturerId}`} key={lecture.id}>
 								<div
 									className='bg-white flex-shrink-0'
 									style={{ width: CARD_WIDTH }}

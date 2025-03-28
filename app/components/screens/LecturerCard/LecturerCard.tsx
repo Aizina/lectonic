@@ -36,6 +36,7 @@ const LecturerCard: FC<LecturerCardProps> = ({ id }) => {
 		<>
 			<Meta title={`${profile.first_name} ${profile.last_name}`}>
 				<SubHeader lecturer={`${profile.first_name} ${profile.last_name}`} />
+				
 				<div className='container flex flex-col md:flex-row mx-auto gap-20 2xl:gap-36 '>
 					<LecturerInfo lecturer={lecturer} profile={profile} />
 					<div className='max-2xl:max-w-[700px]'>
@@ -45,10 +46,10 @@ const LecturerCard: FC<LecturerCardProps> = ({ id }) => {
 							profile={profile}
 						/>
 						{lectures.length !== 0 ? (
-							<LecturesCarousel lectures={lectures} />
+							<LecturesCarousel lectures={lectures} lecturerId={id || profile.lecturer_id} />
 						) : null}
 						{publications.length !== 0 ? (
-							<PublicationsCarousel publications={publications} />
+							<PublicationsCarousel publications={publications}/>
 						) : null}
 						{/* <TeachingPlaces /> */}
 					</div>

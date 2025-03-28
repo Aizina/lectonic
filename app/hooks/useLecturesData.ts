@@ -1,5 +1,4 @@
 import {
-	BundlesWithOrg,
 	LectureDisplay,
 	LecturesResponse,
 	LecturesWithoutOrganization,
@@ -34,26 +33,24 @@ export function useLecturesData(organizationId?: string) {
 				let lecturesTransformed: LectureDisplay[] = []
 
 				if (organizationId) {
-					const bundles = data as BundlesWithOrg[]
-					lecturesTransformed = bundles.map(
-						([lectureItem, themesItem, lecturersItem]) => ({
-							id: lectureItem.id,
-							title: lectureItem.lecture_data.title,
-							description: lectureItem.lecture_data.description,
-							image: lectureItem.lecture_data.image.long,
-							rating: lectureItem.lecture_data.rating ?? '0',
-							themes: themesItem.themes.theme_list.map(t => t.theme),
-							lecturers: lecturersItem.lecturers.map(obj => ({
-								lecturer_id: obj.lecturer_id,
-								specialization: obj.lecturer.specialization,
-								first_name: obj.lecturer.first_name,
-								last_name: obj.lecturer.last_name,
-								middle_name: obj.lecturer.middle_name,
-								photo_main: obj.lecturer.photo_main,
-								photo_small: obj.lecturer.photo_small,
-							})),
-						})
-					)
+					const bundles = data as LecturesWithoutOrganization[]
+					lecturesTransformed = bundles.map(item => ({
+						id: item.id,
+						title: item.lecture_data.title,
+						description: item.lecture_data.description,
+						image: item.lecture_data.image.long,
+						rating: item.lecture_data.rating ?? '0',
+						themes: item.themes.map(t => t.title),
+						lecturers: item.lecturers.map(obj => ({
+							lecturer_id: obj.lecturer_id,
+							specialization: obj.lecturer.specialization,
+							first_name: obj.lecturer.first_name,
+							last_name: obj.lecturer.last_name,
+							middle_name: obj.lecturer.middle_name,
+							photo_main: obj.lecturer.photo_main,
+							photo_small: obj.lecturer.photo_small,
+						})),
+					}))
 				} else {
 					const bundles = data as LecturesWithoutOrganization[]
 					lecturesTransformed = bundles.map(item => ({

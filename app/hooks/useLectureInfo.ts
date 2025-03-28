@@ -27,6 +27,8 @@ export function useLectureData(lectureId?: string) {
 			.then(res => {
 				setLectureData(res.data.data[0])
 				setLecturerData(res.data.data[1])
+				console.log("Lecture Data", lectureData)
+				console.log("Lecturer Data", lecturerData)
 			})
 			.catch(err => {
 				setError(err.message || 'Произошла ошибка при загрузке данных о лекции')

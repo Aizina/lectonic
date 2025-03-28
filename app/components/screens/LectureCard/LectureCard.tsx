@@ -5,6 +5,7 @@ import { FC } from 'react'
 import LectureDetails from './LectureDetails/LectureDetails'
 import LectureInfo from './LectureInfo/LectureInfo'
 import ReviewsCarousel from './Reviews/ReviewsCarousel'
+import { useRouter } from 'next/router'
 
 interface LectureCardProps {
 	id?: string
@@ -12,6 +13,8 @@ interface LectureCardProps {
 
 const LectureCard: FC<LectureCardProps> = ({ id }) => {
 	const { lectureData, lecturerData, loading, error } = useLectureData(id)
+	const router = useRouter();
+	const lecturerId = router.query.lecturerId as string; 
 
 	if (loading) {
 		return (
@@ -36,6 +39,10 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 		' ' +
 		lecturerData.lecturers[0].lecturer.last_name
 
+	const previousLecturer = lecturerData.lecturers.find(
+		(lecturer) => lecturer.lecturer_id.toString() === lecturerId
+		);
+
 	return (
 		<>
 			<Meta title={lecture.title}>
@@ -47,6 +54,7 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 				<LectureInfo
 					lectureData={{ lecture, themes }}
 					lecturerData={lecturerData.lecturers}
+					mainLecturer = {previousLecturer?.lecturer}
 				/>
 				<LectureDetails
 					duration={lecture.duration}
@@ -55,6 +63,12 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 					result={lecture.result}
 				/>
 				<ReviewsCarousel />
+				{previousLecturer && (
+          <div className="bg-gray-200 p-4 rounded-md mb-4">
+            <p className="text-lg font-bold">Вы перешли с лектора:</p>
+            <p className="text-xl">{previousLecturer.lecturer.first_name} {previousLecturer.lecturer.last_name}</p>
+          </div>
+        )}
 			</Meta>
 		</>
 	)
