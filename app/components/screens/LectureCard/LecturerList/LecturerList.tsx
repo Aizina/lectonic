@@ -53,12 +53,12 @@ const LecturerList: React.FC<LecturerListProps> = ({ mainLecturer, lecturerData 
                 </div>
 			</Link>
         </div> : 
-        <div className='flex flex-row items-center justify-between'>
+        <div className='flex flex-row'>
             <div className={`relative flex bg-white w-[400px] p-4 ${showAllLecturers ? 'shadow-xl' : ''}`}
                 style={{ zIndex: 2 }} >
                 {visibleLecturers.map((lecturer, index) => (
                 <div key={index} 
-                    className={'relative w-[60px] h-[60px] rounded-full overflow-hidden mr-[-24px] border-[3px] border-white'}
+                    className={'relative w-[55px] h-[55px] rounded-full overflow-hidden mr-[-24px] border-[3px] border-white'}
                     style={{ zIndex: 1 }} >
                     <Link href={`/lecturer/${lecturer.lecturer_id}`}>
                         <Image src={lecturer.lecturer.photo_small} fill className='object-cover' alt='Лектор' />
@@ -66,14 +66,14 @@ const LecturerList: React.FC<LecturerListProps> = ({ mainLecturer, lecturerData 
                 </div>
                 ))}
                 {remainingCount > 0 && (
-                <div  className='flex items-center justify-center w-[68px] h-[68px] rounded-full bg-[#E9EFFF] text-[#4860EF] border-[3px] border-white'
+                <div  className='flex items-center justify-center w-[55px] h-[55px] rounded-full bg-[#E9EFFF] text-[#4860EF] border-[3px] border-white'
                         style={{ zIndex: 1 }} >
                     {remainingCount}+
                 </div>
                 )}
                 <button 
                     onClick={handleClick}
-                    className='flex items-center justify-center w-[68px] h-[68px] rounded-full pointer'
+                    className='flex items-center justify-center w-[55px] h-[55px] rounded-full pointer'
                 >
                     <Image src={arrowDown} alt='Arrow right' className={`transition-transform duration-300 ${isRotated ? 'rotate-180' : ''}`} />
                 </button>
@@ -87,7 +87,7 @@ const LecturerList: React.FC<LecturerListProps> = ({ mainLecturer, lecturerData 
                             </div>
                         
                             <div className='flex flex-col w-[300px]'>
-                                <span className='font-bold'>
+                                <span className='font-bold text-sm'>
                                 {lecturer.lecturer.first_name} {lecturer.lecturer.middle_name} {lecturer.lecturer.last_name}
                                 </span>
                                 <span className='text-secondaryText text-[14px]'>
@@ -111,14 +111,14 @@ const LecturerList: React.FC<LecturerListProps> = ({ mainLecturer, lecturerData 
             {mainLecturer && (
                 <Link href={`/lecturer/${mainLecturer.lecturer_id}`}>
                     <div className='flex flex-row items-center gap-4 ml-4  py-4'>
-                        <div className='relative w-[60px] h-[60px] rounded-full overflow-hidden  border-[3px] border-white'>
+                        <div className='relative w-[55px] h-[55px] rounded-full overflow-hidden  border-[3px] border-white'>
                             <Image src={mainLecturer.lecturer.photo_small} fill className='object-cover' alt='Главный лектор' />
                         </div>
                         <div className='flex flex-col'>
-                            <span className='text-md font-bold'>
+                            <span className='text-sm font-bold'>
                             {mainLecturer.lecturer.first_name} {mainLecturer.lecturer.middle_name} {mainLecturer.lecturer.last_name}
                             </span>
-                            <span className='text-[16px] text-secondaryText'>{mainLecturer.lecturer.specialization}</span>
+                            <span className='text-xs text-secondaryText'>{mainLecturer.lecturer.specialization}</span>
                         </div>
                     </div>
                 </Link>
