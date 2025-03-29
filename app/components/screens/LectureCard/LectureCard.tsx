@@ -42,19 +42,22 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 	const previousLecturer = lecturerData.lecturers.find(
 		(lecturer) => lecturer.lecturer_id.toString() === lecturerId
 		);
+	const mainLecturerName = previousLecturer ? 
+	previousLecturer?.lecturer.first_name + ' ' + previousLecturer?.lecturer.last_name 
+	: fullName
 
 	return (
 		<>
 			<Meta title={lecture.title}>
 				<SubHeader
-					lecturerId={lecturerData.lecturers[0].lecturer_id}
-					lecturer={fullName}
+					lecturerId={previousLecturer?.lecturer_id || lecturerData.lecturers[0].lecturer_id}
+					lecturer={mainLecturerName}
 					titleLecture={lecture.title}
 				/>
 				<LectureInfo
 					lectureData={{ lecture, themes }}
 					lecturerData={lecturerData.lecturers}
-					mainLecturer = {previousLecturer?.lecturer}
+					mainLecturer = {previousLecturer}
 				/>
 				<LectureDetails
 					duration={lecture.duration}
@@ -63,12 +66,6 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 					result={lecture.result}
 				/>
 				<ReviewsCarousel />
-				{previousLecturer && (
-          <div className="bg-gray-200 p-4 rounded-md mb-4">
-            <p className="text-lg font-bold">Вы перешли с лектора:</p>
-            <p className="text-xl">{previousLecturer.lecturer.first_name} {previousLecturer.lecturer.last_name}</p>
-          </div>
-        )}
 			</Meta>
 		</>
 	)

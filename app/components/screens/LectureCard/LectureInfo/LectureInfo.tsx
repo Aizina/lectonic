@@ -2,7 +2,7 @@ import defaultImage from '@/assets/img/theme_bg.png'
 import arrowRight from '@/assets/svg/arrow-right.svg'
 import { usePriceFormatter } from '@/hooks/usePriceFormatter'
 import { LectureData } from '@/shared/types/lecture.types'
-import { LecturerItem,LecturerProfile } from '@/shared/types/lecturer.types'
+import { LecturerItem } from '@/shared/types/lecturer.types'
 import ModalOrder from '@/ui/ModalOrder/ModalOrder'
 import Image from 'next/image'
 import { FC, useEffect, useRef, useState } from 'react'
@@ -11,7 +11,7 @@ import LecturerList from '../LecturerList/LecturerList'
 interface LectureInfoProps {
 	lectureData: LectureData
 	lecturerData: LecturerItem[]
-	mainLecturer? : LecturerProfile
+	mainLecturer? : LecturerItem
 }
 
 const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData, mainLecturer }) => {
@@ -132,29 +132,6 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData, mainLect
 						</div>
 					</div>
 				)}
-				{/* <Link href={`/lecturer/${lecturerData[0].lecturer_id}`}>
-					<div className='flex'>
-						<div className='relative flex w-[102px] h-[102px] rounded-full overflow-hidden'>
-							<Image
-								src={lecturerData[0].lecturer.photo_small}
-								fill
-								sizes='(max-width: 288px) 100vw, (max-width: 1200px) 50vw, 33vw'
-								alt='Лектор'
-								className='object-cover'
-							/>
-						</div>
-						<div className='max-w-[625px] p-5 flex flex-col'>
-							<span className='font-roboto text-black uppercase text-[24px] leading-[32px]'>
-								{lecturerData[0].lecturer.first_name}{' '}
-								{lecturerData[0].lecturer.middle_name}{' '}
-								{lecturerData[0].lecturer.last_name}
-							</span>
-							<span className='font-montserrat text-secondaryText text-[16px]'>
-								{lecturerData[0].lecturer.specialization}
-							</span>
-						</div>
-					</div>
-				</Link> */}
 				<LecturerList mainLecturer={mainLecturer} lecturerData={lecturerData} />
 			</div>
 			<div className='flex flex-col justify-between max-w-[656px] max-xl:max-w-[450px]'>
