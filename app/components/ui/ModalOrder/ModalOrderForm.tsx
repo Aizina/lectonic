@@ -7,6 +7,7 @@ import Image from 'next/image'
 import React, { FC, useRef, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { useOrderLecture } from '@/hooks/useOrderLecture'
 
 interface ModalOrderFormProps {
 	onSubmit: () => void
@@ -14,6 +15,8 @@ interface ModalOrderFormProps {
 	isSubmitted: boolean
 	setIsSubmitted: (value: boolean) => void
 	modalTitle: 'лекцию' | 'лектора'
+	lectureId?: string
+    speakerId?: string
 }
 
 interface CalendarContainerProps {
@@ -28,6 +31,8 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 	isSubmitted,
 	setIsSubmitted,
 	modalTitle,
+    lectureId,  
+    speakerId,  
 }) => {
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
@@ -47,6 +52,9 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 	const [orgError, setOrgError] = useState('')
 	const [dateError, setDateError] = useState('')
 	const [timeError, setTimeError] = useState('')
+
+	const { postLectureOrder, loading, error } = useOrderLecture()
+
 
 	const handleCalendarClick = () => {
 		setTempDate(selectedDate)
@@ -200,7 +208,7 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 		setAgree(e.target.checked)
 	}
 
-	const handleFormSubmit = (e: React.FormEvent) => {
+	const handleFormSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
 		let isValid = true
 
@@ -252,19 +260,72 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 
 		if (!isValid) return
 
-		setName('')
-		setEmail('')
-		setPhone('')
-		setOrg('')
-		setMessage('')
-		setAgree(false)
-		setNameError('')
-		setEmailError('')
-		setPhoneError('')
-		setOrgError('')
-		setDateError('')
-		setTimeError('')
-		setIsSubmitted(true)
+		const [hours, minutes] = selectedTime.split(':')
+        
+        const nameParts = name.trim().split(' ')
+        const first_name = nameParts[0] || ''
+        const last_name = nameParts[1] || ''
+        const middle_name = nameParts[2] || ''
+
+        let dateString = ''
+        if (selectedDate) {
+            const year = selectedDate.getFullYear()
+            const month = (selectedDate.getMonth() + 1).toString().padStart(2, '0')
+            const day = selectedDate.getDate().toString().padStart(2, '0')
+            dateString = `${year}-${month}-${day}`
+        }
+
+        const requestBody = {
+          description: message, 
+          custom_fields: {
+            cf_time_preferred: [
+              {
+                hours: Number(hours),
+                minutes: Number(minutes),
+                seconds: 0,
+              },
+			  {
+                hours: Number(hours),
+                minutes: Number(minutes),
+                seconds: 0,
+              },
+            ],
+            cf_date_preferred: dateString, 
+            cf_contact: {
+              email: email,
+              phone: phone,
+            },
+            cf_org_name: org,
+            cf_lecture_id: lectureId ? lectureId : undefined,
+            cf_speaker_id: speakerId ? speakerId : undefined,
+            cf_client: {
+              first_name,
+              last_name,
+              middle_name,
+            },
+          },
+        }
+
+        await postLectureOrder(requestBody)
+
+        if (!error) {
+            setName('')
+            setEmail('')
+            setPhone('')
+            setOrg('')
+            setMessage('')
+            setAgree(false)
+            setSelectedDate(null)
+            setSelectedTime('')
+            setNameError('')
+            setEmailError('')
+            setPhoneError('')
+            setOrgError('')
+            setDateError('')
+            setTimeError('')
+            setIsSubmitted(true)
+        }
+
 	}
 
 	if (isSubmitted) {
@@ -541,6 +602,7 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 			</label>
 			<button
 				type='submit'
+				disabled={loading} 
 				className='flex justify-between items-center py-3 px-8 rounded-[52px] bg-primary hover:bg-primary-hover hover:cursor-pointer'
 			>
 				<span className='font-gotham text-white text-[24px]'>{btnVariant}</span>
@@ -548,6 +610,8 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 					<Image src={arrowRight} alt='Arrow right' />
 				</span>
 			</button>
+
+			{error && <p className='text-red-500 mt-4'>Произошла ошибка: {error}</p>}
 		</form>
 	)
 }

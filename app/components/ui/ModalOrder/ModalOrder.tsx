@@ -8,6 +8,8 @@ interface ModalProps {
 	onClose: () => void
 	btnVariant: 'Заказать лекцию' | 'Заказать лектора'
 	modalTitle: 'лекцию' | 'лектора'
+	lectureId?: string 
+	speakerId?: string
 }
 
 const ModalOrder: FC<ModalProps> = ({
@@ -15,6 +17,9 @@ const ModalOrder: FC<ModalProps> = ({
 	onClose,
 	modalTitle,
 	btnVariant,
+	lectureId,
+	speakerId
+
 }) => {
 	useFreezeScroll(isOpen)
 	return (
@@ -24,6 +29,8 @@ const ModalOrder: FC<ModalProps> = ({
 				btnVariant={btnVariant}
 				isOpen={isOpen}
 				onClose={onClose}
+				lectureId = {lectureId}
+				speakerId = {speakerId}
 			/>
 		</ModalOverlay>
 	)

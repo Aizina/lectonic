@@ -9,12 +9,13 @@ import { FC, useEffect, useRef, useState } from 'react'
 import LecturerList from '../LecturerList/LecturerList'
 
 interface LectureInfoProps {
+	lectureId? : string
 	lectureData: LectureData
 	lecturerData: LecturerItem[]
 	mainLecturer? : LecturerItem
 }
 
-const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData, mainLecturer }) => {
+const LectureInfo: FC<LectureInfoProps> = ({lectureId, lectureData, lecturerData, mainLecturer }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [smallHeight, setSmallHeight] = useState(false)
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -89,6 +90,9 @@ const LectureInfo: FC<LectureInfoProps> = ({ lectureData, lecturerData, mainLect
 						onClose={() => setIsModalOpen(false)}
 						modalTitle='лекцию'
 						btnVariant='Заказать лекцию'
+						lectureId = {lectureId}  
+						speakerId = {lecturerData[0].lecturer_id}
+
 					/>
 					{allPricesAreQuery && (
 						<span className='mt-2 ml-8 text-[14px] text-[#6B6B6B] leading-5'>

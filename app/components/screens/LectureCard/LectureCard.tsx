@@ -55,6 +55,7 @@ const LectureCard: FC<LectureCardProps> = ({ id }) => {
 					titleLecture={lecture.title}
 				/>
 				<LectureInfo
+					lectureId = {id}
 					lectureData={{ lecture, themes }}
 					lecturerData={lecturerData.lecturers}
 					mainLecturer = {previousLecturer}

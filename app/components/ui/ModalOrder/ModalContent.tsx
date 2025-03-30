@@ -6,6 +6,9 @@ interface ModalContentProps {
 	modalTitle: 'лекцию' | 'лектора'
 	btnVariant: 'Заказать лекцию' | 'Заказать лектора'
 	onClose: () => void
+	lectureId?: string 
+	speakerId?: string
+	
 }
 
 const ModalContent: FC<ModalContentProps> = ({
@@ -13,6 +16,8 @@ const ModalContent: FC<ModalContentProps> = ({
 	onClose,
 	modalTitle,
 	btnVariant,
+	lectureId,
+	speakerId
 }) => {
 	const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -54,6 +59,8 @@ const ModalContent: FC<ModalContentProps> = ({
 				isSubmitted={isSubmitted}
 				setIsSubmitted={setIsSubmitted}
 				modalTitle={modalTitle}
+				lectureId = {lectureId}
+				speakerId = {speakerId}
 			/>
 		</div>
 	)
