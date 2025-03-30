@@ -18,6 +18,7 @@ import { FC, useState } from 'react'
 interface LecturerInfoProps {
 	lecturer: Lecturer
 	profile: LecturerProfile
+	lecturerId? : string
 }
 
 const socialIcons: Record<string, string> = {
@@ -27,7 +28,7 @@ const socialIcons: Record<string, string> = {
 	LinkedIn: linkedinIcon,
 }
 
-const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
+const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile, lecturerId }) => {
 	const [regaliaOpen, setRegaliaOpen] = useState(false)
 	const [experienceOpen, setExperienceOpen] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState(false)
@@ -204,6 +205,8 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile }) => {
 						onClose={() => setIsModalOpen(false)}
 						modalTitle='лектора'
 						btnVariant='Заказать лектора'
+						speakerId = {lecturerId}
+						
 					/>
 					<div className='flex gap-8 pt-12 pl-3'>
 						{lecturer.contact_media.length > 1

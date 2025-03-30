@@ -38,7 +38,7 @@ const LecturerCard: FC<LecturerCardProps> = ({ id }) => {
 				<SubHeader lecturer={`${profile.first_name} ${profile.last_name}`} />
 				
 				<div className='container flex flex-col md:flex-row mx-auto gap-20 2xl:gap-36 '>
-					<LecturerInfo lecturer={lecturer} profile={profile} />
+					<LecturerInfo lecturer={lecturer} profile={profile} lecturerId = {id}/>
 					<div className='max-2xl:max-w-[700px]'>
 						<DetailedInfo
 							lecturer={lecturer}
