@@ -4,7 +4,7 @@ import LectureOrderForm from './ModalOrderForm'
 interface ModalContentProps {
 	isOpen: boolean
 	modalTitle: 'лекцию' | 'лектора'
-	btnVariant: 'Заказать лекцию' | 'Заказать лектора'
+	btnVariant: 'Заказать лекцию' | 'Пригласить спикера'
 	onClose: () => void
 	lectureId?: string 
 	speakerId?: string
