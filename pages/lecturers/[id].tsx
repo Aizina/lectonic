@@ -16,7 +16,7 @@ const LecturersPageId: FC = () => {
 
 	return (
 		<LecturersPage
-			id={(id as string)}
+			organizationId={(id as string)}
 		/>
 	)
 }
