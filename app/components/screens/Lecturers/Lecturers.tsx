@@ -21,17 +21,6 @@ const Lecturers: FC<LecturersProps> = ({
 }) => {
 	return (
 		<Meta title='Лекторы'>
-			<div className='container mx-auto flex py-32 justify-between gap-10'>
-				<div className='text-left'>
-					<div className='max-w-[356px] flex flex-col gap-5'>
-						<span className='font-roboto font-medium text-[48px] leading-[125%]'>
-							Лекторы
-						</span>
-						<span className='font-montserrat font-normal text-[20px] text-[#6B6B6B] leading-[136%]'>
-							Выберите интересующего вас эксперта.
-						</span>
-					</div>
-				</div>
 				<div>
 					{lecturers.map(lecturer => (
 						<div
@@ -124,7 +113,6 @@ const Lecturers: FC<LecturersProps> = ({
 						</div>
 					)}
 				</div>
-			</div>
 		</Meta>
 	)
 }

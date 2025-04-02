@@ -11,7 +11,7 @@ import { useOrderLecture } from '@/hooks/useOrderLecture'
 
 interface ModalOrderFormProps {
 	onSubmit: () => void
-	btnVariant: 'Заказать лекцию' | 'Заказать лектора'
+	btnVariant: 'Заказать лекцию' | 'Пригласить спикера'
 	isSubmitted: boolean
 	setIsSubmitted: (value: boolean) => void
 	modalTitle: 'лекцию' | 'лектора'
@@ -263,8 +263,8 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 		const [hours, minutes] = selectedTime.split(':')
         
         const nameParts = name.trim().split(' ')
-        const first_name = nameParts[0] || ''
-        const last_name = nameParts[1] || ''
+        const first_name = nameParts[1] || ''
+        const last_name = nameParts[0] || ''
         const middle_name = nameParts[2] || ''
 
         let dateString = ''
@@ -369,7 +369,7 @@ const ModalOrderForm: FC<ModalOrderFormProps> = ({
 			<div className='mb-8'>
 				<input
 					type='text'
-					placeholder='Имя*'
+					placeholder='ФИО*'
 					required
 					maxLength={30}
 					pattern='^[А-Яа-яЁё\s-]+$'
