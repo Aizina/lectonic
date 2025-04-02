@@ -204,7 +204,7 @@ const LecturerInfo: FC<LecturerInfoProps> = ({ lecturer, profile, lecturerId }) 
 						isOpen={isModalOpen}
 						onClose={() => setIsModalOpen(false)}
 						modalTitle='лектора'
-						btnVariant='Заказать лектора'
+						btnVariant='Пригласить спикера'
 						speakerId = {lecturerId}
 						
 					/>
