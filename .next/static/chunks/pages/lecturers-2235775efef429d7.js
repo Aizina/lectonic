@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[667],{4132:(_,e,n)=>{(window.__NEXT_P=window.__NEXT_P||[]).push(["/lecturers",function(){return n(4883)}])}},_=>{var e=e=>_(_.s=e);_.O(0,[465,890,883,636,593,792],()=>e(4132)),_N_E=_.O()}]);
