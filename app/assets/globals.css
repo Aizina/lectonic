@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type='time']::-webkit-inner-spin-button,
+input[type='time']::-webkit-calendar-picker-indicator {
+	display: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.custom-calendar {
+	position: absolute !important;
+	font-family: 'Montserrat', sans-serif !important;
+	width: 286px;
+	height: 333px;
+	margin: 0 auto;
+	border: none !important;
+	border-radius: 16px !important;
+	box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+	background-color: #fff;
+}
+
+.custom-calendar .react-datepicker {
+	background: transparent;
+	margin: 0 auto;
+	width: auto;
+	height: auto;
+}
+
+.custom-calendar .react-datepicker__header {
+	background: transparent;
+	border: none;
+	text-align: center;
+	padding-bottom: 0;
+}
+
+.custom-calendar .react-datepicker__day-names {
+	border-top: 1px solid #efefef;
+	margin-top: 8px;
+	padding-top: 8px;
+}
+
+.custom-calendar .react-datepicker__month {
+	padding: 10px;
+}
+
+.custom-calendar .react-datepicker__day-name {
+	color: #adadad;
+	font-weight: normal;
+	text-transform: capitalize;
+}
+
+.custom-calendar .react-datepicker__week {
+	display: flex;
+	justify-content: center;
+}
+
+.custom-calendar .react-datepicker__day {
+	color: #202020;
+	font-size: 14px;
+	border: none;
+	width: 1.8rem;
+	margin: 0 0.2rem;
+	text-align: center;
+	cursor: pointer;
+}
+
+.custom-calendar .react-datepicker__day:hover {
+	background-color: #cbd3ff !important;
+	color: #fcfcfc;
+	border-radius: 10px !important;
+}
+
+.custom-calendar .react-datepicker__day--selected,
+.custom-calendar .react-datepicker__day--keyboard-selected {
+	background: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+	border: none !important;
+	color: #0421ad !important;
+	text-decoration: underline !important;
+}
+
+.custom-calendar .react-datepicker__day--today {
+	font-weight: normal;
+	background: none;
+	box-shadow: none;
+}
+
+.custom-calendar .react-datepicker__day--disabled {
+	color: #aeaeae !important;
+}
+
+.custom-calendar .react-datepicker__day--outside-month {
+	visibility: hidden;
+}
+
+.custom-calendar-popper {
+	box-shadow: none;
+}
