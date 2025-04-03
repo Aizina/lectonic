@@ -1,13 +1,5 @@
-import { NextPage, GetServerSideProps } from 'next'
+import { NextPage } from 'next'
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  return {
-    redirect: {
-      destination: 'https://lectonic.ru/',
-      permanent: false,
-    },
-  }
-}
 
 const Home: NextPage = () => null
 
