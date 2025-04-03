@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[121],{4310:(_,e,n)=>{(window.__NEXT_P=window.__NEXT_P||[]).push(["/lectures",function(){return n(5721)}])}},_=>{var e=e=>_(_.s=e);_.O(0,[465,890,721,636,593,792],()=>e(4310)),_N_E=_.O()}]);
